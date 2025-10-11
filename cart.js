@@ -2,7 +2,7 @@
 // Stores cart in localStorage, updates badges, drawer, and checkout summary
 
 window.API_BASE = 'https://myfirst-backend.onrender.com';
-const WHATSAPP_NUMBER = '33612345678'; // Replace with your WhatsApp business number
+const WHATSAPP_NUMBER = '23790632168'; // Numéro WhatsApp (sans +, format international)
 
 const CART_KEY = 'mff_cart_v1';
 
@@ -52,6 +52,26 @@ function setQty(id, qty) {
   }
 }
 
+function incQty(id) {
+  const cart = getCart();
+  const item = cart.find((it) => it._id === id);
+  if (item) {
+    item.qty += 1;
+    saveCart(cart);
+    updateCartUI();
+  }
+}
+
+function decQty(id) {
+  const cart = getCart();
+  const item = cart.find((it) => it._id === id);
+  if (item) {
+    item.qty = Math.max(1, item.qty - 1);
+    saveCart(cart);
+    updateCartUI();
+  }
+}
+
 function cartTotals() {
   const cart = getCart();
   const totals = cart.reduce(
@@ -87,10 +107,22 @@ function updateCartDrawer() {
         <div class="font-medium">${it.name}</div>
         <div class="text-white/70 text-sm">${formatPrice(it.price)}</div>
       </div>
-      <div class="flex items-center gap-2">
-        <input type="number" min="1" value="${it.qty}" data-id="${it._id}" class="w-16 bg-black border border-white/10 rounded px-2 py-1" />
-        <div class="w-20 text-right">${formatPrice(it.qty * it.price)}</div>
-        <button data-remove="${it._id}" class="p-2 rounded hover:bg-white/5">🗑️</button>
+      <div class="flex items-center gap-3">
+        <div class="flex items-center gap-1">
+          <button data-dec="${it._id}" class="p-2 rounded ring-1 ring-white/10 hover:bg-white/5" title="Diminuer">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5"><path d="M6 12.75a.75.75 0 0 1 .75-.75h10.5a.75.75 0 0 1 0 1.5H6.75a.75.75 0 0 1-.75-.75Z"/></svg>
+          </button>
+          <input type="number" min="1" value="${it.qty}" data-id="${it._id}" class="w-16 text-center bg-black border border-white/10 rounded px-2 py-1" />
+          <button data-inc="${it._id}" class="p-2 rounded ring-1 ring-white/10 hover:bg-white/5" title="Augmenter">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5"><path d="M12.75 6a.75.75 0 0 0-1.5 0v5.25H6a.75.75 0 0 0 0 1.5h5.25V18a.75.75 0 0 0 1.5 0v-5.25H18a.75.75 0 0 0 0-1.5h-5.25V6Z"/></svg>
+          </button>
+        </div>
+        <div class="w-24 text-right font-medium">${formatPrice(it.qty * it.price)}</div>
+        <button data-remove="${it._id}" class="p-2 rounded ring-1 ring-red-500/50 text-red-400 hover:bg-white/5" title="Supprimer">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5">
+            <path d="M6.75 7.5h10.5M9.75 7.5v-1.5a1.5 1.5 0 011.5-1.5h1.5a1.5 1.5 0 011.5 1.5V7.5m-9 0l.75 12A1.5 1.5 0 0016.5 19.5l.75-12"/>
+          </svg>
+        </button>
       </div>
     `;
     container.appendChild(row);
@@ -103,6 +135,12 @@ function updateCartDrawer() {
   // wire inputs
   container.querySelectorAll('input[type="number"]').forEach((inp) => {
     inp.addEventListener('change', (e) => setQty(e.target.getAttribute('data-id'), e.target.value));
+  });
+  container.querySelectorAll('button[data-inc]').forEach((btn) => {
+    btn.addEventListener('click', () => incQty(btn.getAttribute('data-inc')));
+  });
+  container.querySelectorAll('button[data-dec]').forEach((btn) => {
+    btn.addEventListener('click', () => decQty(btn.getAttribute('data-dec')));
   });
   container.querySelectorAll('button[data-remove]').forEach((btn) => {
     btn.addEventListener('click', () => removeFromCart(btn.getAttribute('data-remove')));
