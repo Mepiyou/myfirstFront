@@ -42,7 +42,7 @@ async function fetchProductsAdmin() {
   return Array.isArray(payload.data) ? payload.data : payload;
 }
 
-function euro(n) { return new Intl.NumberFormat('fr-FR', { style: 'currency', currency: 'EUR' }).format(n); }
+function formatFCFA(n) { return new Intl.NumberFormat('fr-FR', { style: 'currency', currency: 'XOF', currencyDisplay: 'code' }).format(n).replace('XOF', 'FCFA'); }
 
 function renderTable(products) {
   const tbody = document.getElementById('productsTable');
@@ -52,7 +52,7 @@ function renderTable(products) {
       <td class="py-2 pr-4"><img src="${p.image || 'https://via.placeholder.com/48'}" class="w-12 h-12 object-cover rounded"/></td>
       <td class="py-2 pr-4">${p.name}</td>
       <td class="py-2 pr-4">${p.category || ''}</td>
-      <td class="py-2 pr-4">${euro(p.price)}</td>
+      <td class=\"py-2 pr-4\">${formatFCFA(p.price)}</td>
       <td class="py-2 pr-4">${p.stock ?? ''}</td>
       <td class="py-2 pr-4">${p.isPromotion ? 'Yes' : 'No'}</td>
       <td class="py-2 pr-4 flex gap-2">
@@ -125,7 +125,7 @@ async function loadProducts() {
     const products = await fetchProductsAdmin();
     renderTable(products);
   } catch (e) {
-    toast('Failed to load products', false);
+    toast('Échec du chargement des produits', false);
   }
 }
 
@@ -136,12 +136,12 @@ function bindTabs() {
     if (!deleteTargetId) return;
     try {
       const res = await fetch(`${API_BASE}/api/admin/products/${deleteTargetId}`, { method: 'DELETE', headers: { ...authHeaders() } });
-      if (!res.ok) throw new Error('Delete failed');
-      toast('Product deleted');
+      if (!res.ok) throw new Error('Échec de la suppression');
+      toast('Produit supprimé');
       closeDeleteModal();
       loadProducts();
     } catch (e) {
-      toast(e.message || 'Error', false);
+      toast(e.message || 'Erreur', false);
     }
   });
 
@@ -171,12 +171,12 @@ function bindTabs() {
           fd.append('image', file);
         }
         const res = await fetch(`${API_BASE}/api/admin/products/${id}`, { method: 'PUT', headers: { ...authHeaders() }, body: fd });
-        if (!res.ok) throw new Error('Update failed');
-        toast('Product updated');
+        if (!res.ok) throw new Error('Échec de la mise à jour');
+        toast('Produit mis à jour');
         closeEditModal();
         loadProducts();
       } catch (err) {
-        toast(err.message || 'Error', false);
+        toast(err.message || 'Erreur', false);
       }
     });
   }
@@ -222,13 +222,13 @@ function bindAddForm() {
         fd.append('image', file);
       }
       const res = await fetch(`${API_BASE}/api/admin/products`, { method: 'POST', headers: { ...authHeaders() }, body: fd });
-      if (!res.ok) throw new Error('Create failed');
+      if (!res.ok) throw new Error('Échec de la création');
       form.reset();
-      toast('Product created');
+      toast('Produit créé');
       document.querySelector('[data-tab="products"]').click();
       loadProducts();
     } catch (err) {
-      toast(err.message || 'Error', false);
+      toast(err.message || 'Erreur', false);
     }
   });
 }
@@ -256,7 +256,7 @@ function onLoginPage() {
       await login(email, password);
       window.location = '/admin/dashboard.html';
     } catch (err) {
-      msg.textContent = err.message || 'Invalid credentials';
+      msg.textContent = err.message || 'Identifiants invalides';
       msg.classList.remove('hidden');
     } finally {
       spin.classList.add('hidden');

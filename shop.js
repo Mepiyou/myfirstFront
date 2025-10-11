@@ -39,8 +39,8 @@ function renderSkeleton(count = 2) {
   grid.innerHTML = Array.from({ length: count }).map(card).join('');
 }
 
-function euro(n) {
-  return new Intl.NumberFormat('fr-FR', { style: 'currency', currency: 'EUR' }).format(n);
+function fcfa(n) {
+  return new Intl.NumberFormat('fr-FR', { style: 'currency', currency: 'XOF', currencyDisplay: 'code' }).format(n).replace('XOF', 'FCFA');
 }
 
 function productCard(p) {
@@ -54,12 +54,12 @@ function productCard(p) {
       <div class="p-4">
         <div class="flex items-center justify-between">
           <h3 class="font-playfair text-lg">${p.name}</h3>
-          <span class="font-semibold">${euro(p.price)}</span>
+          <span class=\"font-semibold\">${fcfa(p.price)}</span>
         </div>
         <div class="text-sm text-black/70 mt-1">${p.category || ''}</div>
         <div class="mt-4 flex gap-2">
-          <button data-view="${p._id}" class="flex-1 ring-1 ring-gold rounded px-3 py-2 hover:bg-black hover:text-white transition">View</button>
-          <button data-add="${p._id}" class="flex-1 bg-gold text-black rounded px-3 py-2 font-semibold hover:scale-105 transition">Add to Cart</button>
+          <button data-view=\"${p._id}\" class=\"flex-1 ring-1 ring-gold rounded px-3 py-2 hover:bg-black hover:text-white transition\">Voir</button>
+          <button data-add=\"${p._id}\" class=\"flex-1 bg-gold text-black rounded px-3 py-2 font-semibold hover:scale-105 transition\">Ajouter au panier</button>
         </div>
       </div>
     </div>
@@ -79,7 +79,7 @@ function renderGrid() {
   grid.innerHTML = state.filtered.map(productCard).join('');
   if (!state.filtered.length) {
     // fallback empty state
-    grid.innerHTML = '<div class="col-span-full text-center text-white/70">No products found.</div>';
+    grid.innerHTML = '<div class=\"col-span-full text-center text-white/70\">Aucun produit trouvé.</div>';
   }
 
   // Wire buttons
@@ -105,7 +105,7 @@ function openProductModal(p) {
   document.getElementById('modalTitle').textContent = p.name;
   document.getElementById('modalCategory').textContent = p.category || '';
   document.getElementById('modalDescription').textContent = p.description || '';
-  document.getElementById('modalPrice').textContent = euro(p.price);
+  document.getElementById('modalPrice').textContent = fcfa(p.price);
   const addBtn = document.getElementById('modalAddBtn');
   addBtn.onclick = () => {
     window.addToCart({ _id: p._id, name: p.name, price: p.price, image: p.image });
@@ -121,7 +121,7 @@ function closeProductModal() {
 
 async function fetchProducts() {
   try {
-    showState('Loading products...');
+    showState('Chargement des produits...');
     renderSkeleton(2);
     const res = await fetch(`${API_BASE}/api/products`);
     if (!res.ok) throw new Error('Failed to fetch products');
@@ -132,7 +132,7 @@ async function fetchProducts() {
     renderGrid();
   } catch (err) {
     console.error(err);
-    showState('Unable to load products. Please try again later.', true);
+    showState('Impossible de charger les produits. Veuillez réessayer plus tard.', true);
   }
 }
 

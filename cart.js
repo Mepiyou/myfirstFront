@@ -20,7 +20,7 @@ function saveCart(cart) {
 }
 
 function formatPrice(n) {
-  return new Intl.NumberFormat('fr-FR', { style: 'currency', currency: 'EUR' }).format(n);
+  return new Intl.NumberFormat('fr-FR', { style: 'currency', currency: 'XOF', currencyDisplay: 'code' }).format(n).replace('XOF', 'FCFA');
 }
 
 // Add to cart: product = { _id, name, price, image }
@@ -156,7 +156,7 @@ function openWhatsAppOrder() {
   if (!cart.length) return;
   const lines = cart.map((it) => `- ${it.name} (x${it.qty}): ${formatPrice(it.qty * it.price)}`);
   const { price } = cartTotals();
-  const message = `🛍️ MyFirst Fragrances Order Summary:\n${lines.join('\n')}\nTotal: ${formatPrice(price)}\nThank you for your order!`;
+  const message = `🛍️ Récapitulatif de commande MyFirst Fragrances:\n${lines.join('\\n')}\nTotal: ${formatPrice(price)}\nMerci pour votre commande !`;
   const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
   window.open(url, '_blank');
 }

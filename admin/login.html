@@ -14,8 +14,8 @@
   </head>
   <body class="min-h-screen bg-black text-white grid place-items-center p-6">
     <div class="w-full max-w-md bg-white/5 border border-white/10 rounded-xl p-8">
-      <h1 class="font-playfair text-3xl text-center">Admin Login</h1>
-      <p class="text-white/70 text-center mt-2">Access the dashboard</p>
+      <h1 class="font-playfair text-3xl text-center">Connexion Admin</h1>
+      <p class="text-white/70 text-center mt-2">Accédez au tableau de bord</p>
 
       <form id="loginForm" class="mt-8 space-y-4">
         <div>
@@ -23,11 +23,11 @@
           <input id="email" type="email" required class="mt-1 w-full bg-black border border-white/10 rounded px-3 py-2" placeholder="admin@example.com" />
         </div>
         <div>
-          <label class="block text-sm text-white/80">Password</label>
+          <label class="block text-sm text-white/80">Mot de passe</label>
           <input id="password" type="password" required class="mt-1 w-full bg-black border border-white/10 rounded px-3 py-2" placeholder="••••••••" />
         </div>
         <button id="loginBtn" class="w-full bg-gold text-black py-2 rounded font-semibold hover:scale-105 transition flex items-center justify-center gap-2">
-          <span>Login</span>
+          <span>Se connecter</span>
           <svg id="loginSpinner" class="w-5 h-5 animate-spin hidden" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
             <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
             <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"></path>
@@ -35,7 +35,7 @@
         </button>
       </form>
 
-      <p id="loginMsg" class="mt-4 text-center text-sm text-red-400 hidden">Invalid credentials</p>
+      <p id="loginMsg" class="mt-4 text-center text-sm text-red-400 hidden">Identifiants invalides</p>
     </div>
 
     <script src="./admin.js"></script>
