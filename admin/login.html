@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin Login — MyFirst Fragrances</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = { theme: { extend: { colors: { gold: '#D4AF37' } , fontFamily: { inter:['Inter','sans-serif'], playfair:['Playfair Display','serif'] } } } }
+    </script>
+    <link rel="icon" href="/assets/favicon.ico" />
+    <style> body { font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif; } </style>
+  </head>
+  <body class="min-h-screen bg-black text-white grid place-items-center p-6">
+    <div class="w-full max-w-md bg-white/5 border border-white/10 rounded-xl p-8">
+      <h1 class="font-playfair text-3xl text-center">Admin Login</h1>
+      <p class="text-white/70 text-center mt-2">Access the dashboard</p>
+
+      <form id="loginForm" class="mt-8 space-y-4">
+        <div>
+          <label class="block text-sm text-white/80">Email</label>
+          <input id="email" type="email" required class="mt-1 w-full bg-black border border-white/10 rounded px-3 py-2" placeholder="admin@example.com" />
+        </div>
+        <div>
+          <label class="block text-sm text-white/80">Password</label>
+          <input id="password" type="password" required class="mt-1 w-full bg-black border border-white/10 rounded px-3 py-2" placeholder="••••••••" />
+        </div>
+        <button class="w-full bg-gold text-black py-2 rounded font-semibold hover:scale-105 transition">Login</button>
+      </form>
+
+      <p id="loginMsg" class="mt-4 text-center text-sm text-red-400 hidden">Invalid credentials</p>
+    </div>
+
+    <script src="/admin/admin.js"></script>
+  </body>
+</html>

@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MyFirst Fragrances — Authenticity in Every Drop</title>
+    <meta name="description" content="Premium fragrances for Men, Women, Children and Gift Sets. Authenticity in Every Drop." />
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet" />
+
+    <!-- TailwindCSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              gold: '#D4AF37',
+              black: '#000000',
+              white: '#FFFFFF'
+            },
+            fontFamily: {
+              inter: ['Inter', 'system-ui', 'Avenir', 'Helvetica', 'Arial', 'sans-serif'],
+              playfair: ['Playfair Display', 'Georgia', 'serif']
+            }
+          }
+        }
+      }
+    </script>
+
+    <link rel="icon" href="/assets/favicon.ico" />
+    <style>
+      body { font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif; }
+    </style>
+  </head>
+  <body class="bg-black text-white">
+    <!-- Navbar -->
+    <header class="fixed top-0 inset-x-0 z-40 bg-black/80 backdrop-blur supports-[backdrop-filter]:bg-black/60 border-b border-white/10">
+      <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex h-16 items-center justify-between">
+          <a href="#" class="flex items-center gap-3">
+            <img src="/assets/logo.png" alt="MyFirst Fragrances" class="w-8 h-8 rounded-full ring-1 ring-gold/30" />
+            <span class="font-playfair text-xl tracking-wide">MyFirst Fragrances</span>
+          </a>
+          <div class="hidden md:flex items-center gap-8">
+            <a href="#home" class="hover:text-gold transition">Home</a>
+            <a href="#shop" class="hover:text-gold transition">Shop</a>
+            <a href="#contact" class="hover:text-gold transition">Contact</a>
+          </div>
+          <div class="flex items-center gap-4">
+            <button id="cartBtn" class="relative p-2 rounded-full ring-1 ring-white/20 hover:ring-gold/50 transition">
+              <span class="sr-only">Open cart</span>
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 1 0 0 6 3 3 0 0 0 0-6Zm9-9h3.11c.86 0 1.5.792 1.332 1.636l-1.2 6A1.5 1.5 0 0 1 18.266 14.25H8.22a1.5 1.5 0 0 1-1.463-1.154L5.106 5.272M21 21a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+              </svg>
+              <span id="cartCount" class="absolute -top-1 -right-1 bg-gold text-black text-xs font-semibold w-5 h-5 grid place-content-center rounded-full">0</span>
+            </button>
+            <button id="mobileMenuBtn" class="md:hidden p-2 rounded hover:bg-white/5">
+              <span class="sr-only">Open menu</span>
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+              </svg>
+            </button>
+          </div>
+        </div>
+        <div id="mobileMenu" class="md:hidden hidden pb-4">
+          <a href="#home" class="block py-2 hover:text-gold">Home</a>
+          <a href="#shop" class="block py-2 hover:text-gold">Shop</a>
+          <a href="#contact" class="block py-2 hover:text-gold">Contact</a>
+        </div>
+      </nav>
+    </header>
+
+    <main class="pt-16" id="home">
+      <!-- Hero -->
+      <section class="relative overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-br from-black via-black to-gold/10"></div>
+        <div class="max-w-7xl mx-auto px-6 py-24 sm:py-28 lg:py-32 relative">
+          <div class="max-w-3xl">
+            <h1 class="font-playfair text-4xl sm:text-5xl lg:text-6xl leading-tight">
+              MyFirst Fragrances
+            </h1>
+            <p class="mt-4 text-lg sm:text-xl text-white/80">Authenticity in Every Drop</p>
+            <div class="mt-8 flex gap-4">
+              <a href="#shop" class="inline-flex items-center gap-2 bg-gold text-black px-6 py-3 rounded-md font-semibold shadow shadow-gold/30 hover:scale-105 transition duration-300">
+                Shop Now
+              </a>
+              <a href="#contact" class="inline-flex items-center gap-2 ring-1 ring-gold px-6 py-3 rounded-md hover:bg-white/5 transition duration-300">
+                Contact Us
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Shop / Filters -->
+      <section id="shop" class="max-w-7xl mx-auto px-6 py-16">
+        <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+          <h2 class="font-playfair text-3xl">Our Collection</h2>
+          <div class="flex flex-wrap gap-2">
+            <button data-filter="All" class="filter-btn bg-gold text-black px-4 py-2 rounded-md text-sm font-medium">All</button>
+            <button data-filter="Men" class="filter-btn ring-1 ring-gold px-4 py-2 rounded-md text-sm hover:bg-white/5">Men</button>
+            <button data-filter="Women" class="filter-btn ring-1 ring-gold px-4 py-2 rounded-md text-sm hover:bg-white/5">Women</button>
+            <button data-filter="Children" class="filter-btn ring-1 ring-gold px-4 py-2 rounded-md text-sm hover:bg-white/5">Children</button>
+            <button data-filter="Gift Sets (Coffrets)" class="filter-btn ring-1 ring-gold px-4 py-2 rounded-md text-sm hover:bg-white/5">Gift Sets (Coffrets)</button>
+          </div>
+        </div>
+
+        <!-- Grid -->
+        <div id="productsGrid" class="mt-8 grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6"></div>
+
+        <!-- Loading / Error -->
+        <div id="stateBox" class="mt-8 text-center text-white/70 hidden"></div>
+      </section>
+
+      <!-- Contact / Footer CTA -->
+      <section id="contact" class="max-w-7xl mx-auto px-6 pb-20">
+        <div class="rounded-xl border border-white/10 p-8 bg-white/5">
+          <h3 class="font-playfair text-2xl">We’re here for you</h3>
+          <p class="mt-2 text-white/80">Questions about our fragrances or your order? Reach us on Instagram or WhatsApp.</p>
+          <div class="mt-6 flex flex-wrap gap-3">
+            <a href="https://instagram.com" target="_blank" class="inline-flex items-center gap-2 ring-1 ring-gold px-5 py-2 rounded-md hover:bg-white/5 transition"><span>Instagram</span></a>
+            <a href="#" id="whatsAppQuick" class="inline-flex items-center gap-2 bg-gold text-black px-5 py-2 rounded-md font-semibold hover:scale-105 transition">WhatsApp</a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="border-t border-white/10 py-8 bg-black/80">
+      <div class="max-w-7xl mx-auto px-6 flex flex-col sm:flex-row items-center justify-between gap-4">
+        <p class="text-white/60">© <span id="year"></span> MyFirst Fragrances. All rights reserved.</p>
+        <p class="text-white/60">Crafted with passion • Premium scents</p>
+      </div>
+    </footer>
+
+    <!-- Product Detail Modal -->
+    <div id="productModal" class="fixed inset-0 z-50 hidden">
+      <div class="absolute inset-0 bg-black/70"></div>
+      <div class="relative max-w-3xl mx-auto mt-20 bg-black border border-white/10 rounded-xl overflow-hidden">
+        <div class="flex flex-col md:flex-row">
+          <img id="modalImage" class="w-full md:w-1/2 h-64 md:h-auto object-cover" src="" alt="" />
+          <div class="p-6 md:w-1/2">
+            <h3 id="modalTitle" class="font-playfair text-2xl"></h3>
+            <p id="modalCategory" class="mt-1 text-gold/90"></p>
+            <p id="modalDescription" class="mt-4 text-white/80"></p>
+            <p id="modalPrice" class="mt-6 text-xl font-semibold">€0</p>
+            <div class="mt-6 flex gap-3">
+              <button id="modalAddBtn" class="bg-gold text-black px-5 py-2 rounded-md font-semibold hover:scale-105 transition">Add to Cart</button>
+              <button data-close-modal class="ring-1 ring-white/20 px-5 py-2 rounded-md hover:bg-white/5 transition">Close</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Cart Drawer -->
+    <div id="cartDrawer" class="fixed inset-0 z-50 hidden">
+      <div class="absolute inset-0 bg-black/60" data-close-cart></div>
+      <aside class="absolute right-0 top-0 h-full w-full max-w-md bg-black border-l border-white/10 p-6 flex flex-col">
+        <div class="flex items-center justify-between">
+          <h3 class="font-playfair text-2xl">Your Cart</h3>
+          <button data-close-cart class="p-2 rounded hover:bg-white/5">✕</button>
+        </div>
+        <div id="cartItems" class="mt-6 flex-1 space-y-4 overflow-y-auto pr-1"></div>
+        <div class="mt-6 border-t border-white/10 pt-4">
+          <div class="flex items-center justify-between">
+            <span class="text-white/70">Items</span>
+            <span id="cartTotalQty" class="font-semibold">0</span>
+          </div>
+          <div class="flex items-center justify-between mt-1">
+            <span class="text-white/70">Total</span>
+            <span id="cartTotalPrice" class="font-semibold">€0</span>
+          </div>
+          <button id="checkoutBtn" class="mt-4 w-full bg-gold text-black py-3 rounded-md font-semibold hover:scale-105 transition">Proceed to Checkout</button>
+        </div>
+      </aside>
+    </div>
+
+    <!-- Checkout Summary Modal -->
+    <div id="checkoutModal" class="fixed inset-0 z-50 hidden">
+      <div class="absolute inset-0 bg-black/70"></div>
+      <div class="relative max-w-xl mx-auto mt-24 bg-black border border-white/10 rounded-xl p-6">
+        <h3 class="font-playfair text-2xl">Order Summary</h3>
+        <div id="summaryItems" class="mt-4 space-y-3 max-h-72 overflow-y-auto pr-1"></div>
+        <div class="mt-4 flex items-center justify-between border-t border-white/10 pt-4">
+          <span>Total items</span><span id="summaryQty" class="font-semibold">0</span>
+        </div>
+        <div class="flex items-center justify-between mt-1">
+          <span>Total price</span><span id="summaryPrice" class="font-semibold">€0</span>
+        </div>
+        <div class="mt-6 flex gap-3 justify-end">
+          <button data-close-checkout class="ring-1 ring-white/20 px-5 py-2 rounded-md hover:bg-white/5 transition">Close</button>
+          <button id="whatsAppOrderBtn" class="bg-gold text-black px-5 py-2 rounded-md font-semibold hover:scale-105 transition">Order via WhatsApp</button>
+        </div>
+      </div>
+    </div>
+
+    <script src="/cart.js"></script>
+    <script src="/shop.js"></script>
+  </body>
+</html>

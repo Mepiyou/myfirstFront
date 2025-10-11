@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin Dashboard — MyFirst Fragrances</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = { theme: { extend: { colors: { gold: '#D4AF37' }, fontFamily: { inter:['Inter','sans-serif'], playfair:['Playfair Display','serif'] } } } }
+    </script>
+    <link rel="icon" href="/assets/favicon.ico" />
+    <style> body { font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif; } </style>
+  </head>
+  <body class="min-h-screen bg-black text-white" data-page="dashboard">
+    <header class="border-b border-white/10 bg-black/80">
+      <div class="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
+        <div class="flex items-center gap-3">
+          <img src="/assets/logo.png" alt="MyFirst" class="w-8 h-8 rounded-full ring-1 ring-gold/30" />
+          <span class="font-playfair text-xl">MyFirst Admin</span>
+        </div>
+        <button id="logoutBtn" class="ring-1 ring-gold px-4 py-2 rounded hover:bg-white/5">Logout</button>
+      </div>
+    </header>
+
+    <div class="max-w-7xl mx-auto px-6 py-8 grid grid-cols-1 md:grid-cols-4 gap-6">
+      <!-- Sidebar -->
+      <aside class="md:col-span-1 space-y-2">
+        <a href="#" data-tab="products" class="tab-btn block w-full text-left px-4 py-2 rounded bg-white/5 border border-white/10">Products</a>
+        <a href="#" data-tab="add" class="tab-btn block w-full text-left px-4 py-2 rounded border border-white/10 hover:bg-white/5">Add Product</a>
+        <a href="#" class="block w-full text-left px-4 py-2 rounded border border-white/10 hover:bg-white/5">Promotions</a>
+        <a href="#" class="block w-full text-left px-4 py-2 rounded border border-white/10 hover:bg-white/5">Settings</a>
+      </aside>
+
+      <!-- Content -->
+      <section class="md:col-span-3 space-y-6">
+        <!-- Products table -->
+        <div id="tab-products" class="rounded-xl border border-white/10 p-6">
+          <div class="flex items-center justify-between">
+            <h2 class="font-playfair text-2xl">Products</h2>
+            <button id="refreshBtn" class="ring-1 ring-gold px-4 py-2 rounded hover:bg-white/5">Refresh</button>
+          </div>
+          <div class="overflow-x-auto mt-4">
+            <table class="min-w-full text-sm">
+              <thead class="text-left text-white/70 border-b border-white/10">
+                <tr>
+                  <th class="py-2 pr-4">Image</th>
+                  <th class="py-2 pr-4">Name</th>
+                  <th class="py-2 pr-4">Category</th>
+                  <th class="py-2 pr-4">Price</th>
+                  <th class="py-2 pr-4">Stock</th>
+                  <th class="py-2 pr-4">Promo</th>
+                  <th class="py-2 pr-4">Actions</th>
+                </tr>
+              </thead>
+              <tbody id="productsTable"></tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Add product form -->
+        <div id="tab-add" class="rounded-xl border border-white/10 p-6 hidden">
+          <h2 class="font-playfair text-2xl">Add Product</h2>
+          <form id="addForm" class="mt-4 grid grid-cols-1 md:grid-cols-2 gap-4" enctype="multipart/form-data">
+            <div>
+              <label class="block text-sm text-white/80">Name</label>
+              <input name="name" required class="mt-1 w-full bg-black border border-white/10 rounded px-3 py-2" />
+            </div>
+            <div>
+              <label class="block text-sm text-white/80">Category</label>
+              <select name="category" required class="mt-1 w-full bg-black border border-white/10 rounded px-3 py-2">
+                <option>Men</option>
+                <option>Women</option>
+                <option>Children</option>
+                <option>Gift Sets (Coffrets)</option>
+              </select>
+            </div>
+            <div>
+              <label class="block text-sm text-white/80">Price (€)</label>
+              <input name="price" type="number" step="0.01" required class="mt-1 w-full bg-black border border-white/10 rounded px-3 py-2" />
+            </div>
+            <div>
+              <label class="block text-sm text-white/80">Stock</label>
+              <input name="stock" type="number" required class="mt-1 w-full bg-black border border-white/10 rounded px-3 py-2" />
+            </div>
+            <div class="md:col-span-2">
+              <label class="block text-sm text-white/80">Description</label>
+              <textarea name="description" rows="3" class="mt-1 w-full bg-black border border-white/10 rounded px-3 py-2"></textarea>
+            </div>
+            <div>
+              <label class="block text-sm text-white/80">Promotion</label>
+              <select name="isPromotion" class="mt-1 w-full bg-black border border-white/10 rounded px-3 py-2">
+                <option value="false">No</option>
+                <option value="true">Yes</option>
+              </select>
+            </div>
+            <div>
+              <label class="block text-sm text-white/80">Image</label>
+              <input name="image" type="file" accept="image/*" class="mt-1 w-full" />
+            </div>
+            <div class="md:col-span-2">
+              <button class="bg-gold text-black px-5 py-2 rounded font-semibold hover:scale-105 transition">Create</button>
+            </div>
+          </form>
+        </div>
+      </section>
+    </div>
+
+    <!-- Toast -->
+    <div id="toast" class="fixed bottom-6 right-6 hidden px-4 py-2 rounded bg-white text-black shadow"></div>
+
+    <script src="/admin/admin.js"></script>
+  </body>
+</html>
