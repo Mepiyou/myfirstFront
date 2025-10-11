@@ -182,7 +182,6 @@ function bindTabs() {
   }
 
   const tabs = document.querySelectorAll('.tab-btn');
-  const tabs = document.querySelectorAll('.tab-btn');
   tabs.forEach(btn => btn.addEventListener('click', (e) => {
     e.preventDefault();
     const target = btn.getAttribute('data-tab');
@@ -222,23 +221,6 @@ function bindAddForm() {
       } else if (file) {
         fd.append('image', file);
       }
-      const res = await fetch(`${API_BASE}/api/admin/products`, { method: 'POST', headers: { ...authHeaders() }, body: fd });
-      if (!res.ok) throw new Error('Create failed');
-      form.reset();
-      toast('Product created');
-      document.querySelector('[data-tab="products"]').click();
-      loadProducts();
-    } catch (err) {
-      toast(err.message || 'Error', false);
-    }
-  });
-}
-  const form = document.getElementById('addForm');
-  if (!form) return;
-  form.addEventListener('submit', async (e) => {
-    e.preventDefault();
-    try {
-      const fd = new FormData(form);
       const res = await fetch(`${API_BASE}/api/admin/products`, { method: 'POST', headers: { ...authHeaders() }, body: fd });
       if (!res.ok) throw new Error('Create failed');
       form.reset();

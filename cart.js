@@ -1,7 +1,7 @@
 // cart.js - Local cart management and UI updates
 // Stores cart in localStorage, updates badges, drawer, and checkout summary
 
-const API_BASE = 'https://myfirst-backend.onrender.com';
+window.API_BASE = 'https://myfirst-backend.onrender.com';
 const WHATSAPP_NUMBER = '33612345678'; // Replace with your WhatsApp business number
 
 const CART_KEY = 'mff_cart_v1';

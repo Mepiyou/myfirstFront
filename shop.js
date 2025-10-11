@@ -1,6 +1,6 @@
 // shop.js - Fetch products, render grid, filters, and product modal
 
-const API_BASE = 'https://myfirst-backend.onrender.com';
+const API_BASE = window.API_BASE || 'https://myfirst-backend.onrender.com';
 
 const state = {
   products: [],
