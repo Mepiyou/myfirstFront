@@ -100,25 +100,25 @@ function updateCartDrawer() {
   container.innerHTML = '';
   cart.forEach((it) => {
     const row = document.createElement('div');
-    row.className = 'flex gap-3 items-center';
+    row.className = 'flex flex-wrap items-center gap-3';
     row.innerHTML = `
       <img src="${it.image || 'https://via.placeholder.com/64'}" class="w-16 h-16 object-cover rounded border border-white/10"/>
-      <div class="flex-1">
-        <div class="font-medium">${it.name}</div>
+      <div class="flex-1 min-w-[140px]">
+        <div class="font-medium truncate">${it.name}</div>
         <div class="text-white/70 text-sm">${formatPrice(it.price)}</div>
       </div>
-      <div class="flex items-center gap-3">
-        <div class="flex items-center gap-1">
+      <div class="flex items-center gap-2 md:gap-3 flex-wrap md:flex-nowrap justify-end md:justify-start flex-1 md:flex-none">
+        <div class="flex items-center gap-1 shrink-0">
           <button data-dec="${it._id}" class="p-2 rounded ring-1 ring-white/10 hover:bg-white/5" title="Diminuer">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5"><path d="M6 12.75a.75.75 0 0 1 .75-.75h10.5a.75.75 0 0 1 0 1.5H6.75a.75.75 0 0 1-.75-.75Z"/></svg>
           </button>
-          <input type="number" min="1" value="${it.qty}" data-id="${it._id}" class="w-16 text-center bg-black border border-white/10 rounded px-2 py-1" />
+          <input type="number" min="1" value="${it.qty}" data-id="${it._id}" class="w-12 md:w-16 text-center bg-black border border-white/10 rounded px-2 py-1" />
           <button data-inc="${it._id}" class="p-2 rounded ring-1 ring-white/10 hover:bg-white/5" title="Augmenter">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5"><path d="M12.75 6a.75.75 0 0 0-1.5 0v5.25H6a.75.75 0 0 0 0 1.5h5.25V18a.75.75 0 0 0 1.5 0v-5.25H18a.75.75 0 0 0 0-1.5h-5.25V6Z"/></svg>
           </button>
         </div>
-        <div class="w-24 text-right font-medium">${formatPrice(it.qty * it.price)}</div>
-        <button data-remove="${it._id}" class="p-2 rounded ring-1 ring-red-500/50 text-red-400 hover:bg-white/5" title="Supprimer">
+        <div class="text-right font-medium w-20 md:w-24 shrink-0">${formatPrice(it.qty * it.price)}</div>
+        <button data-remove="${it._id}" class="p-2 rounded ring-1 ring-red-500/50 text-red-400 hover:bg-white/5 shrink-0 ml-auto md:ml-0 order-3 md:order-none" title="Supprimer">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5">
             <path d="M6.75 7.5h10.5M9.75 7.5v-1.5a1.5 1.5 0 011.5-1.5h1.5a1.5 1.5 0 011.5 1.5V7.5m-9 0l.75 12A1.5 1.5 0 0016.5 19.5l.75-12"/>
           </svg>
