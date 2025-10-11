@@ -26,7 +26,13 @@
           <label class="block text-sm text-white/80">Password</label>
           <input id="password" type="password" required class="mt-1 w-full bg-black border border-white/10 rounded px-3 py-2" placeholder="••••••••" />
         </div>
-        <button class="w-full bg-gold text-black py-2 rounded font-semibold hover:scale-105 transition">Login</button>
+        <button id="loginBtn" class="w-full bg-gold text-black py-2 rounded font-semibold hover:scale-105 transition flex items-center justify-center gap-2">
+          <span>Login</span>
+          <svg id="loginSpinner" class="w-5 h-5 animate-spin hidden" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+            <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"></path>
+          </svg>
+        </button>
       </form>
 
       <p id="loginMsg" class="mt-4 text-center text-sm text-red-400 hidden">Invalid credentials</p>

@@ -23,6 +23,22 @@ function hideState() {
   box.classList.add('hidden');
 }
 
+function renderSkeleton(count = 2) {
+  const grid = document.getElementById('productsGrid');
+  if (!grid) return;
+  const card = () => `
+    <div class="rounded-xl overflow-hidden ring-1 ring-white/10 animate-pulse">
+      <div class="h-60 bg-white/10"></div>
+      <div class="p-4 space-y-2">
+        <div class="h-5 bg-white/10 rounded w-2/3"></div>
+        <div class="h-4 bg-white/10 rounded w-1/3"></div>
+        <div class="h-9 bg-white/10 rounded mt-3"></div>
+      </div>
+    </div>
+  `;
+  grid.innerHTML = Array.from({ length: count }).map(card).join('');
+}
+
 function euro(n) {
   return new Intl.NumberFormat('fr-FR', { style: 'currency', currency: 'EUR' }).format(n);
 }
@@ -61,6 +77,10 @@ function renderGrid() {
   const grid = document.getElementById('productsGrid');
   if (!grid) return;
   grid.innerHTML = state.filtered.map(productCard).join('');
+  if (!state.filtered.length) {
+    // fallback empty state
+    grid.innerHTML = '<div class="col-span-full text-center text-white/70">No products found.</div>';
+  }
 
   // Wire buttons
   grid.querySelectorAll('button[data-add]').forEach((btn) => {
@@ -102,6 +122,7 @@ function closeProductModal() {
 async function fetchProducts() {
   try {
     showState('Loading products...');
+    renderSkeleton(2);
     const res = await fetch(`${API_BASE}/api/products`);
     if (!res.ok) throw new Error('Failed to fetch products');
     const payload = await res.json();
