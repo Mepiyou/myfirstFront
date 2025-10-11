@@ -45,21 +45,25 @@ function fcfa(n) {
 
 function productCard(p) {
   const img = p.image || 'https://via.placeholder.com/400x400?text=Perfume';
+  const out = Number(p.stock || 0) <= 0;
   return `
-    <div class="group rounded-xl bg-white text-black overflow-hidden ring-1 ring-gold/30 hover:ring-gold transition shadow hover:shadow-gold/20">
+    <div class="group rounded-xl bg-white text-black overflow-hidden ring-1 ring-gold/30 hover:ring-gold transition shadow hover:shadow-gold/20 ${out ? 'opacity-90' : ''}">
       <div class="relative">
-        <img src="${img}" alt="${p.name}" class="w-full h-60 object-cover group-hover:scale-105 transition duration-300" />
-        ${p.isPromotion ? '<span class="absolute top-2 left-2 bg-gold text-black text-xs font-semibold px-2 py-1 rounded">Promo</span>' : ''}
+        <img src="${img}" alt="${p.name}" class="w-full h-60 object-cover ${out ? '' : 'group-hover:scale-105'} transition duration-300" />
+        ${p.isPromotion ? '<span class=\"absolute top-2 left-2 bg-gold text-black text-xs font-semibold px-2 py-1 rounded\">Promo</span>' : ''}
+        ${out ? '<span class=\"absolute top-2 right-2 bg-red-600 text-white text-xs font-semibold px-2 py-1 rounded\">Indisponible</span>' : ''}
       </div>
       <div class="p-4">
         <div class="flex items-center justify-between">
           <h3 class="font-playfair text-lg">${p.name}</h3>
-          <span class=\"font-semibold\">${fcfa(p.price)}</span>
+          <span class="font-semibold">${fcfa(p.price)}</span>
         </div>
-        <div class="text-sm text-black/70 mt-1">${p.category || ''}</div>
+        <div class="text-sm ${out ? 'text-red-500' : 'text-black/70'} mt-1">${out ? 'Indisponible' : (p.category || '')}</div>
         <div class="mt-4 flex gap-2">
-          <button data-view=\"${p._id}\" class=\"flex-1 ring-1 ring-gold rounded px-3 py-2 hover:bg-black hover:text-white transition\">Voir</button>
-          <button data-add=\"${p._id}\" class=\"flex-1 bg-gold text-black rounded px-3 py-2 font-semibold hover:scale-105 transition\">Ajouter au panier</button>
+          <button data-view="${p._id}" class="flex-1 ring-1 ring-gold rounded px-3 py-2 hover:bg-black hover:text-white transition">Voir</button>
+          ${out
+            ? '<button class=\"flex-1 bg-gray-500 text-white rounded px-3 py-2 font-semibold cursor-not-allowed\" disabled aria-disabled=\"true\">Indisponible</button>'
+            : `<button data-add="${p._id}" class="flex-1 bg-gold text-black rounded px-3 py-2 font-semibold hover:scale-105 transition">Ajouter au panier</button>`}
         </div>
       </div>
     </div>
@@ -86,6 +90,7 @@ function renderGrid() {
   grid.querySelectorAll('button[data-add]').forEach((btn) => {
     const id = btn.getAttribute('data-add');
     const p = state.products.find((x) => x._id === id);
+    if (!p || Number(p.stock || 0) <= 0) return; // sécurité
     btn.addEventListener('click', () => {
       window.addToCart({ _id: p._id, name: p.name, price: p.price, image: p.image });
     });
@@ -107,10 +112,22 @@ function openProductModal(p) {
   document.getElementById('modalDescription').textContent = p.description || '';
   document.getElementById('modalPrice').textContent = fcfa(p.price);
   const addBtn = document.getElementById('modalAddBtn');
-  addBtn.onclick = () => {
-    window.addToCart({ _id: p._id, name: p.name, price: p.price, image: p.image });
-    modal.classList.add('hidden');
-  };
+  if (Number(p.stock || 0) <= 0) {
+    addBtn.textContent = 'Indisponible';
+    addBtn.setAttribute('disabled', 'true');
+    addBtn.classList.add('bg-gray-500','text-white','cursor-not-allowed');
+    addBtn.classList.remove('bg-gold');
+    addBtn.onclick = null;
+  } else {
+    addBtn.textContent = 'Ajouter au panier';
+    addBtn.removeAttribute('disabled');
+    addBtn.classList.remove('bg-gray-500','text-white','cursor-not-allowed');
+    addBtn.classList.add('bg-gold');
+    addBtn.onclick = () => {
+      window.addToCart({ _id: p._id, name: p.name, price: p.price, image: p.image });
+      modal.classList.add('hidden');
+    };
+  }
   modal.classList.remove('hidden');
 }
 
