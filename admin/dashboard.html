@@ -12,34 +12,34 @@
     <link rel="icon" href="../assets/favicon.ico" />
     <style> body { font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif; } </style>
   </head>
-  <body class="min-h-screen bg-black text-white" data-page="dashboard">
-    <header class="border-b border-white/10 bg-black/80">
+  <body class="min-h-screen bg-white text-black" data-page="dashboard">
+    <header class="border-b border-black/10 bg-white/90">
       <div class="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
         <div class="flex items-center gap-3">
-          <img src="../assets/logo.png" alt="MyFirst" class="w-8 h-8 rounded-full ring-1 ring-gold/30" />
+          <img src="../assets/logo.png" alt="MyFirst" class="w-8 h-8 rounded-full ring-1 ring-black/20" />
           <span class="font-playfair text-xl">Administration MyFirst</span>
         </div>
-        <button id="logoutBtn" class="ring-1 ring-gold px-4 py-2 rounded hover:bg-white/5">Se déconnecter</button>
+        <button id="logoutBtn" class="ring-1 ring-black px-4 py-2 rounded hover:bg-black/5">Se déconnecter</button>
       </div>
     </header>
 
     <div class="max-w-7xl mx-auto px-6 py-8 grid grid-cols-1 md:grid-cols-4 gap-6">
       <!-- Sidebar -->
-      <aside class="md:col-span-1 space-y-2">
-        <a href="#" data-tab="products" class="tab-btn block w-full text-left px-4 py-2 rounded bg-white/5 border border-white/10">Produits</a>
-        <a href="#" data-tab="add" class="tab-btn block w-full text-left px-4 py-2 rounded border border-white/10 hover:bg-white/5">Ajouter un produit</a>
+      <aside class="md:col-span-1 space-y-2 uppercase tracking-wide text-sm">
+        <a href="#" data-tab="products" class="tab-btn block w-full text-left px-4 py-2 rounded bg-black text-white">Produits</a>
+        <a href="#" data-tab="add" class="tab-btn block w-full text-left px-4 py-2 rounded ring-1 ring-black hover:bg-black hover:text-white transition">Ajouter un produit</a>
+        <a href="#" class="block w-full text-left px-4 py-2 rounded ring-1 ring-black hover:bg-black hover:text-white transition">Promotions</a>
+        <a href="#" class="block w-full text-left px-4 py-2 rounded ring-1 ring-black hover:bg-black hover:text-white transition">Paramètres</a>
       </aside>
-
-      <!-- Content -->
       <section class="md:col-span-3 space-y-6">
         <!-- Modals -->
         <div id="deleteModal" class="fixed inset-0 z-50 hidden">
           <div class="absolute inset-0 bg-black/60" data-close-del></div>
-          <div class="relative max-w-md mx-auto mt-32 bg-black border border-white/10 rounded-xl p-6">
+          <div class="relative max-w-md mx-auto mt-32 bg-white text-black border border-black/10 rounded-xl p-6">
             <h3 class="font-playfair text-xl">Supprimer le produit</h3>
-            <p class="mt-2 text-white/80">Êtes-vous sûr de vouloir supprimer ce produit ?</p>
+            <p class="mt-2 text-black/80">Êtes-vous sûr de vouloir supprimer ce produit ?</p>
             <div class="mt-6 flex justify-end gap-3">
-              <button data-close-del class="ring-1 ring-white/20 px-4 py-2 rounded hover:bg-white/5">Annuler</button>
+              <button data-close-del class="ring-1 ring-black px-4 py-2 rounded hover:bg-black/5">Annuler</button>
               <button id="confirmDeleteBtn" class="bg-red-600 text-white px-4 py-2 rounded hover:opacity-90">Supprimer</button>
             </div>
           </div>
@@ -50,7 +50,7 @@
           <!-- Scrollable container for small screens -->
           <div class="absolute inset-0 overflow-y-auto">
             <div class="min-h-full flex items-start sm:items-center justify-center p-4">
-              <div class="w-full max-w-2xl bg-black border border-white/10 rounded-xl p-6">
+              <div class="w-full max-w-2xl bg-white text-black border border-black/10 rounded-xl p-6">
                 <h3 class="font-playfair text-xl">Modifier le produit</h3>
                 <form id="editForm" class="mt-4 grid grid-cols-1 md:grid-cols-2 gap-4" enctype="multipart/form-data">
                   <input type="hidden" name="_id" />
@@ -81,22 +81,22 @@
                   </div>
                   <div>
                     <label class="block text-sm text-white/80">Promotion</label>
-                    <select name="isPromotion" class="mt-1 w-full bg-black border border-white/10 rounded px-3 py-2">
+                    <select name="isPromotion" class="mt-1 w-full bg-white text-black border border-black/10 rounded px-3 py-2">
                       <option value="false">No</option>
                       <option value="true">Yes</option>
                     </select>
                   </div>
                   <div>
                     <label class="block text-sm text-white/80">Image (fichier)</label>
-                    <input name="image" type="file" accept="image/*" class="mt-1 w-full" />
+                    <input name="image" type="file" accept="image/*" class="mt-1 w-full text-black" />
                   </div>
                   <div class="md:col-span-2">
                     <label class="block text-sm text-white/80">Ou URL d'image</label>
-                    <input name="imageUrl" type="url" placeholder="https://..." class="mt-1 w-full bg-black border border-white/10 rounded px-3 py-2" />
+                    <input name="imageUrl" type="url" placeholder="https://..." class="mt-1 w-full bg-white text-black border border-black/10 rounded px-3 py-2" />
                   </div>
                   <div class="md:col-span-2 flex justify-end gap-3">
-                    <button type="button" data-close-edit class="ring-1 ring-white/20 px-4 py-2 rounded hover:bg-white/5">Annuler</button>
-                    <button class="bg-gold text-black px-5 py-2 rounded font-semibold hover:scale-105">Enregistrer</button>
+                    <button type="button" data-close-edit class="ring-1 ring-black px-4 py-2 rounded hover:bg-black/5">Annuler</button>
+                    <button class="bg-black text-white px-5 py-2 rounded font-semibold hover:opacity-90">Enregistrer</button>
                   </div>
                 </form>
               </div>
@@ -104,14 +104,14 @@
           </div>
         </div>
         <!-- Products table -->
-        <div id="tab-products" class="rounded-xl border border-white/10 p-6">
+        <div id="tab-products" class="rounded-xl border border-black/10 p-6 bg-white">
           <div class="flex items-center justify-between">
             <h2 class="font-playfair text-2xl">Produits</h2>
-            <button id="refreshBtn" class="ring-1 ring-gold px-4 py-2 rounded hover:bg-white/5">Rafraîchir</button>
+            <button id="refreshBtn" class="ring-1 ring-black px-4 py-2 rounded hover:bg-black/5">Rafraîchir</button>
           </div>
           <div class="overflow-x-auto mt-4">
             <table class="min-w-full text-sm">
-              <thead class="text-left text-white/70 border-b border-white/10">
+              <thead class="text-left text-black/70 border-b border-black/10">
                 <tr>
                   <th class="py-2 pr-4">Image</th>
                   <th class="py-2 pr-4">Nom</th>
@@ -128,16 +128,16 @@
         </div>
 
         <!-- Add product form -->
-        <div id="tab-add" class="rounded-xl border border-white/10 p-6 hidden">
+        <div id="tab-add" class="rounded-xl border border-black/10 p-6 hidden bg-white">
           <h2 class="font-playfair text-2xl">Ajouter un produit</h2>
           <form id="addForm" class="mt-4 grid grid-cols-1 md:grid-cols-2 gap-4" enctype="multipart/form-data">
             <div>
               <label class="block text-sm text-white/80">Nom</label>
-              <input name="name" required class="mt-1 w-full bg-black border border-white/10 rounded px-3 py-2" />
+              <input name="name" required class="mt-1 w-full bg-white text-black border border-black/10 rounded px-3 py-2" />
             </div>
             <div>
               <label class="block text-sm text-white/80">Catégorie</label>
-              <select name="category" required class="mt-1 w-full bg-black border border-white/10 rounded px-3 py-2">
+              <select name="category" required class="mt-1 w-full bg-white text-black border border-black/10 rounded px-3 py-2">
                 <option>Men</option>
                 <option>Women</option>
                 <option>Children</option>
@@ -146,33 +146,33 @@
             </div>
             <div>
               <label class="block text-sm text-white/80">Prix (FCFA)</label>
-              <input name="price" type="number" step="0.01" required class="mt-1 w-full bg-black border border-white/10 rounded px-3 py-2" />
+              <input name="price" type="number" step="0.01" required class="mt-1 w-full bg-white text-black border border-black/10 rounded px-3 py-2" />
             </div>
             <div>
               <label class="block text-sm text-white/80">Stock</label>
-              <input name="stock" type="number" required class="mt-1 w-full bg-black border border-white/10 rounded px-3 py-2" />
+              <input name="stock" type="number" required class="mt-1 w-full bg-white text-black border border-black/10 rounded px-3 py-2" />
             </div>
             <div class="md:col-span-2">
               <label class="block text-sm text-white/80">Description</label>
-              <textarea name="description" rows="3" class="mt-1 w-full bg-black border border-white/10 rounded px-3 py-2"></textarea>
+              <textarea name="description" rows="3" class="mt-1 w-full bg-white text-black border border-black/10 rounded px-3 py-2"></textarea>
             </div>
             <div>
               <label class="block text-sm text-white/80">Promotion</label>
-              <select name="isPromotion" class="mt-1 w-full bg-black border border-white/10 rounded px-3 py-2">
+              <select name="isPromotion" class="mt-1 w-full bg-white text-black border border-black/10 rounded px-3 py-2">
                 <option value="false">No</option>
                 <option value="true">Yes</option>
               </select>
             </div>
             <div>
               <label class="block text-sm text-white/80">Image (fichier)</label>
-              <input name="image" type="file" accept="image/*" class="mt-1 w-full" />
+              <input name="image" type="file" accept="image/*" class="mt-1 w-full text-black" />
             </div>
             <div class="md:col-span-2">
               <label class="block text-sm text-white/80">Or Image URL</label>
-              <input name="imageUrl" type="url" placeholder="https://..." class="mt-1 w-full bg-black border border-white/10 rounded px-3 py-2" />
+                <input name="imageUrl" type="url" placeholder="https://..." class="mt-1 w-full bg-white text-black border border-black/10 rounded px-3 py-2" />
             </div>
             <div class="md:col-span-2">
-              <button class="bg-gold text-black px-5 py-2 rounded font-semibold hover:scale-105 transition">Créer</button>
+              <button class="bg-black text-white px-5 py-2 rounded font-semibold hover:opacity-90 transition">Créer</button>
             </div>
           </form>
         </div>

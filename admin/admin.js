@@ -11,7 +11,7 @@ function toast(msg, ok = true) {
   const t = document.getElementById('toast');
   if (!t) return;
   t.textContent = msg;
-  t.className = `fixed bottom-6 right-6 px-4 py-2 rounded shadow ${ok ? 'bg-gold text-black' : 'bg-red-500 text-white'}`;
+  t.className = `fixed bottom-6 right-6 px-4 py-2 rounded shadow ${ok ? 'bg-black text-white' : 'bg-red-500 text-white'}`;
   t.classList.remove('hidden');
   setTimeout(() => t.classList.add('hidden'), 2500);
 }
