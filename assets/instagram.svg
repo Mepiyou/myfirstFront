@@ -1,6 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<svg width="24" height="24" viewBox="0 0 24 24" fill="#000" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Instagram">
-  <rect x="2" y="2" width="20" height="20" rx="5"/>
-  <circle cx="12" cy="12" r="4" fill="#fff"/>
-  <circle cx="17.5" cy="6.5" r="1.5" fill="#fff"/>
+<svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        role="img"
+        aria-label="Instagram"
+>
+    <defs>
+        <!-- Dégradé officiel Instagram -->
+        <radialGradient id="IG-gradient" cx="30%" cy="107%" r="150%" fx="30%" fy="107%">
+            <stop offset="0%" stop-color="#fdf497"/>
+            <stop offset="5%" stop-color="#fdf497"/>
+            <stop offset="45%" stop-color="#fd5949"/>
+            <stop offset="60%" stop-color="#d6249f"/>
+            <stop offset="90%" stop-color="#285AEB"/>
+        </radialGradient>
+    </defs>
+
+    <!-- Fond dégradé -->
+    <rect x="2" y="2" width="20" height="20" rx="5" fill="url(#IG-gradient)"/>
+
+    <!-- Contour de l'appareil photo -->
+    <circle cx="12" cy="12" r="4.5" fill="none" stroke="#ffffff" stroke-width="2"/>
+
+    <!-- Flash -->
+    <circle cx="17.5" cy="6.5" r="1.5" fill="#ffffff"/>
 </svg>
