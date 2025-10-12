@@ -10,7 +10,26 @@
       tailwind.config = { theme: { extend: { colors: { gold: '#D4AF37' }, fontFamily: { inter:['Inter','sans-serif'], playfair:['Playfair Display','serif'] } } } }
     </script>
     <link rel="icon" href="../assets/favicon.ico" />
-    <style> body { font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif; } </style>
+    <style>
+      body { font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif; }
+      /* Reusable form field */
+      .field {
+        background-color: #fff;
+        color: #000;
+        border: 1px solid rgba(0,0,0,0.1);
+        border-radius: 0.5rem; /* ~ rounded */
+        padding: 0.5rem 0.75rem; /* ~ py-2 px-3 */
+        transition: box-shadow .2s ease, border-color .2s ease;
+      }
+      .field:focus {
+        outline: 2px solid #000;
+        outline-offset: 2px;
+      }
+      .field[disabled] {
+        background-color: #f5f5f5;
+        color: #888;
+      }
+    </style>
   </head>
   <body class="min-h-screen bg-white text-black" data-page="dashboard">
     <header class="border-b border-black/10 bg-white/90">
@@ -53,12 +72,12 @@
                 <form id="editForm" class="mt-4 grid grid-cols-1 md:grid-cols-2 gap-4" enctype="multipart/form-data">
                   <input type="hidden" name="_id" />
                   <div>
-                    <label class="block text-sm text-white/80">Nom</label>
-                    <input name="name" required class="mt-1 w-full bg-gradient-to-br from-black via-[#1a1a1a] to-[#2d2d2d] border border-white/10 rounded px-3 py-2 text-white shadow-[0_0_20px_rgba(212,175,55,0.15)]" />
+                    <label class="block text-sm text-black/80">Nom</label>
+              <input name="name" required class="mt-1 w-full field" />
                   </div>
                   <div>
-                    <label class="block text-sm text-white/80">Catégorie</label>
-                    <select name="category" required class="mt-1 w-full bg-gradient-to-br from-black via-[#1a1a1a] to-[#2d2d2d] border border-white/10 rounded px-3 py-2 text-white shadow-[0_0_20px_rgba(212,175,55,0.15)]">
+                    <label class="block text-sm text-black/80">Catégorie</label>
+                    <select name="category" required class="mt-1 w-full field">
                       <option>Men</option>
                       <option>Women</option>
                       <option>Children</option>
@@ -66,31 +85,31 @@
                     </select>
                   </div>
                   <div>
-                    <label class="block text-sm text-white/80">Prix (FCFA)</label>
-                    <input name="price" type="number" step="0.01" required class="mt-1 w-full bg-gradient-to-br from-black via-[#1a1a1a] to-[#2d2d2d] border border-white/10 rounded px-3 py-2 text-white shadow-[0_0_20px_rgba(212,175,55,0.15)]" />
+                    <label class="block text-sm text-black/80">Prix (FCFA)</label>
+                    <input name="price" type="number" step="0.01" required class="mt-1 w-full field" />
                   </div>
                   <div>
-                    <label class="block text-sm text-white/80">Stock</label>
-                    <input name="stock" type="number" required class="mt-1 w-full bg-gradient-to-br from-black via-[#1a1a1a] to-[#2d2d2d] border border-white/10 rounded px-3 py-2 text-white shadow-[0_0_20px_rgba(212,175,55,0.15)]" />
+                    <label class="block text-sm text-black/80">Stock</label>
+                    <input name="stock" type="number" required class="mt-1 w-full field" />
                   </div>
                   <div class="md:col-span-2">
-                    <label class="block text-sm text-white/80">Description</label>
-                    <textarea name="description" rows="3" class="mt-1 w-full bg-gradient-to-br from-black via-[#1a1a1a] to-[#2d2d2d] border border-white/10 rounded px-3 py-2 text-white shadow-[0_0_20px_rgba(212,175,55,0.15)]"></textarea>
+                    <label class="block text-sm text-black/80">Description</label>
+                    <textarea name="description" rows="3" class="mt-1 w-full field"></textarea>
                   </div>
                   <div>
-                    <label class="block text-sm text-white/80">Promotion</label>
-                    <select name="isPromotion" class="mt-1 w-full bg-white text-black border border-black/10 rounded px-3 py-2">
+                    <label class="block text-sm text-black/80">Promotion</label>
+                    <select name="isPromotion" class="mt-1 w-full field">
                       <option value="false">No</option>
                       <option value="true">Yes</option>
                     </select>
                   </div>
                   <div>
-                    <label class="block text-sm text-white/80">Image (fichier)</label>
+                    <label class="block text-sm text-black/80">Image (fichier)</label>
                     <input name="image" type="file" accept="image/*" class="mt-1 w-full text-black" />
                   </div>
                   <div class="md:col-span-2">
-                    <label class="block text-sm text-white/80">Ou URL d'image</label>
-                    <input name="imageUrl" type="url" placeholder="https://..." class="mt-1 w-full bg-white text-black border border-black/10 rounded px-3 py-2" />
+                    <label class="block text-sm text-black/80">Ou URL d'image</label>
+                    <input name="imageUrl" type="url" placeholder="https://..." class="mt-1 w-full field" />
                   </div>
                   <div class="md:col-span-2 flex justify-end gap-3">
                     <button type="button" data-close-edit class="ring-1 ring-black px-4 py-2 rounded hover:bg-black/5">Annuler</button>
@@ -130,12 +149,12 @@
           <h2 class="font-playfair text-2xl">Ajouter un produit</h2>
           <form id="addForm" class="mt-4 grid grid-cols-1 md:grid-cols-2 gap-4" enctype="multipart/form-data">
             <div>
-              <label class="block text-sm text-white/80">Nom</label>
-              <input name="name" required class="mt-1 w-full bg-white text-black border border-black/10 rounded px-3 py-2" />
+              <label class="block text-sm text-black/80">Nom</label>
+              <input name="name" required class="mt-1 w-full field" />
             </div>
             <div>
-              <label class="block text-sm text-white/80">Catégorie</label>
-              <select name="category" required class="mt-1 w-full bg-white text-black border border-black/10 rounded px-3 py-2">
+              <label class="block text-sm text-black/80">Catégorie</label>
+              <select name="category" required class="mt-1 w-full field">
                 <option>Men</option>
                 <option>Women</option>
                 <option>Children</option>
@@ -143,31 +162,31 @@
               </select>
             </div>
             <div>
-              <label class="block text-sm text-white/80">Prix (FCFA)</label>
-              <input name="price" type="number" step="0.01" required class="mt-1 w-full bg-white text-black border border-black/10 rounded px-3 py-2" />
+              <label class="block text-sm text-black/80">Prix (FCFA)</label>
+              <input name="price" type="number" step="0.01" required class="mt-1 w-full field" />
             </div>
             <div>
-              <label class="block text-sm text-white/80">Stock</label>
-              <input name="stock" type="number" required class="mt-1 w-full bg-white text-black border border-black/10 rounded px-3 py-2" />
+              <label class="block text-sm text-black/80">Stock</label>
+              <input name="stock" type="number" required class="mt-1 w-full field" />
             </div>
             <div class="md:col-span-2">
-              <label class="block text-sm text-white/80">Description</label>
-              <textarea name="description" rows="3" class="mt-1 w-full bg-white text-black border border-black/10 rounded px-3 py-2"></textarea>
+              <label class="block text-sm text-black/80">Description</label>
+              <textarea name="description" rows="3" class="mt-1 w-full field"></textarea>
             </div>
             <div>
-              <label class="block text-sm text-white/80">Promotion</label>
-              <select name="isPromotion" class="mt-1 w-full bg-white text-black border border-black/10 rounded px-3 py-2">
+              <label class="block text-sm text-black/80">Promotion</label>
+              <select name="isPromotion" class="mt-1 w-full field">
                 <option value="false">No</option>
                 <option value="true">Yes</option>
               </select>
             </div>
             <div>
-              <label class="block text-sm text-white/80">Image (fichier)</label>
+              <label class="block text-sm text-black/80">Image (fichier)</label>
               <input name="image" type="file" accept="image/*" class="mt-1 w-full text-black" />
             </div>
             <div class="md:col-span-2">
-              <label class="block text-sm text-white/80">Or Image URL</label>
-                <input name="imageUrl" type="url" placeholder="https://..." class="mt-1 w-full bg-white text-black border border-black/10 rounded px-3 py-2" />
+              <label class="block text-sm text-black/80">Or Image URL</label>
+                <input name="imageUrl" type="url" placeholder="https://..." class="mt-1 w-full field" />
             </div>
             <div class="md:col-span-2">
               <button class="bg-black text-white px-5 py-2 rounded font-semibold hover:opacity-90 transition">Créer</button>
