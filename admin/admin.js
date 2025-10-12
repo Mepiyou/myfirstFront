@@ -187,8 +187,8 @@ function bindTabs() {
     const target = btn.getAttribute('data-tab');
     document.querySelectorAll('[id^="tab-"]').forEach(sec => sec.classList.add('hidden'));
     document.getElementById(`tab-${target}`)?.classList.remove('hidden');
-    tabs.forEach(b => b.classList.remove('bg-white/5'));
-    btn.classList.add('bg-white/5');
+    tabs.forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
   }));
 }
 
