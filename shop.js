@@ -27,12 +27,12 @@ function renderSkeleton(count = 2) {
   const grid = document.getElementById('productsGrid');
   if (!grid) return;
   const card = () => `
-    <div class="rounded-xl overflow-hidden ring-1 ring-white/10 animate-pulse">
-      <div class="h-60 bg-white/10"></div>
+    <div class=\"rounded-xl overflow-hidden ring-1 ring-black/10 animate-pulse\">
+      <div class=\"h-60 bg-neutral-200\"></div>
       <div class="p-4 space-y-2">
-        <div class="h-5 bg-white/10 rounded w-2/3"></div>
-        <div class="h-4 bg-white/10 rounded w-1/3"></div>
-        <div class="h-9 bg-white/10 rounded mt-3"></div>
+        <div class=\"h-5 bg-neutral-200 rounded w-2/3\"></div>
+        <div class=\"h-4 bg-neutral-200 rounded w-1/3\"></div>
+        <div class=\"h-9 bg-neutral-200 rounded mt-3\"></div>
       </div>
     </div>
   `;
@@ -47,7 +47,7 @@ function productCard(p) {
   const img = p.image || 'https://via.placeholder.com/400x400?text=Perfume';
   const out = Number(p.stock || 0) <= 0;
   return `
-    <div class="group rounded-xl bg-white text-black overflow-hidden ring-1 ring-gold/30 hover:ring-gold transition shadow hover:shadow-gold/20 ${out ? 'opacity-90' : ''}">
+    <div class=\"group rounded-xl bg-white text-black overflow-hidden ring-1 ring-black/10 hover:shadow-lg transition ${out ? 'opacity-90' : ''}\">
       <div class="relative">
         <img src="${img}" alt="${p.name}" class="w-full h-60 object-cover ${out ? '' : 'group-hover:scale-105'} transition duration-300" />
         ${p.isPromotion ? '<span class=\"absolute top-2 left-2 bg-gold text-black text-xs font-semibold px-2 py-1 rounded\">Promo</span>' : ''}
@@ -60,10 +60,10 @@ function productCard(p) {
         </div>
         <div class="text-sm ${out ? 'text-red-500' : 'text-black/70'} mt-1">${out ? 'Indisponible' : (p.category || '')}</div>
         <div class="mt-4 flex gap-2">
-          <button data-view="${p._id}" class="flex-1 ring-1 ring-gold rounded px-3 py-2 hover:bg-black hover:text-white transition">Voir</button>
+          <button data-view=\"${p._id}\" class=\"flex-1 ring-1 ring-black rounded px-3 py-2 hover:bg-black hover:text-white transition\">Voir</button>
           ${out
             ? '<button class=\"flex-1 bg-gray-500 text-white rounded px-3 py-2 font-semibold cursor-not-allowed\" disabled aria-disabled=\"true\">Indisponible</button>'
-            : `<button data-add="${p._id}" class="flex-1 bg-gold text-black rounded px-3 py-2 font-semibold hover:scale-105 transition">Ajouter au panier</button>`}
+            : `<button data-add=\"${p._id}\" class=\"flex-1 bg-black text-white rounded px-3 py-2 font-semibold hover:opacity-90 transition\">Ajouter au panier</button>`}
         </div>
       </div>
     </div>

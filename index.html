@@ -34,59 +34,58 @@
       body { font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif; }
     </style>
   </head>
-  <body class="bg-black text-white">
+  <body class="bg-white text-black">
     <!-- Navbar -->
-    <header class="fixed top-0 inset-x-0 z-40 bg-black/80 backdrop-blur supports-[backdrop-filter]:bg-black/60 border-b border-white/10">
+    <header class="fixed top-0 inset-x-0 z-40 bg-white/90 backdrop-blur border-b border-black/10">
       <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex h-16 items-center justify-between">
           <a href="#" class="flex items-center gap-3">
-            <img src="assets/logo.png" alt="MyFirst Fragrances" class="w-8 h-8 rounded-full ring-1 ring-gold/30" />
+            <img src="assets/logo.png" alt="MyFirst Fragrances" class="w-8 h-8 rounded-full ring-1 ring-black/20" />
             <span class="font-playfair text-xl tracking-wide">MyFirst Fragrances</span>
           </a>
-          <div class="hidden md:flex items-center gap-8">
-            <a href="#home" class="hover:text-gold transition">Accueil</a>
-            <a href="#shop" class="hover:text-gold transition">Boutique</a>
-            <a href="#contact" class="hover:text-gold transition">Contact</a>
+          <div class="hidden md:flex items-center gap-8 uppercase tracking-wide text-sm">
+            <a href="#home" class="hover:opacity-70 transition">Accueil</a>
+            <a href="#shop" class="hover:opacity-70 transition">Boutique</a>
+            <a href="#contact" class="hover:opacity-70 transition">Contact</a>
           </div>
           <div class="flex items-center gap-4">
-            <button id="cartBtn" class="relative p-2 rounded-full ring-1 ring-white/20 hover:ring-gold/50 transition">
-              <span class="sr-only">Open cart</span>
+            <button id="cartBtn" class="relative p-2 rounded-full ring-1 ring-black/20 hover:ring-black/60 transition">
+              <span class="sr-only">Ouvrir le panier</span>
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 1 0 0 6 3 3 0 0 0 0-6Zm9-9h3.11c.86 0 1.5.792 1.332 1.636l-1.2 6A1.5 1.5 0 0 1 18.266 14.25H8.22a1.5 1.5 0 0 1-1.463-1.154L5.106 5.272M21 21a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
               </svg>
-              <span id="cartCount" class="absolute -top-1 -right-1 bg-gold text-black text-xs font-semibold w-5 h-5 grid place-content-center rounded-full">0</span>
+              <span id="cartCount" class="absolute -top-1 -right-1 bg-black text-white text-xs font-semibold w-5 h-5 grid place-content-center rounded-full">0</span>
             </button>
-            <button id="mobileMenuBtn" class="md:hidden p-2 rounded hover:bg-white/5">
-              <span class="sr-only">Open menu</span>
+            <button id="mobileMenuBtn" class="md:hidden p-2 rounded hover:bg-black/5">
+              <span class="sr-only">Ouvrir le menu</span>
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
               </svg>
             </button>
           </div>
         </div>
-        <div id="mobileMenu" class="md:hidden hidden pb-4">
-          <a href="#home" class="block py-2 hover:text-gold">Accueil</a>
-          <a href="#shop" class="block py-2 hover:text-gold">Boutique</a>
-          <a href="#contact" class="block py-2 hover:text-gold">Contact</a>
+        <div id="mobileMenu" class="md:hidden hidden pb-4 uppercase tracking-wide text-sm">
+          <a href="#home" class="block py-2 hover:opacity-70">Accueil</a>
+          <a href="#shop" class="block py-2 hover:opacity-70">Boutique</a>
+          <a href="#contact" class="block py-2 hover:opacity-70">Contact</a>
         </div>
       </nav>
     </header>
 
     <main class="pt-16" id="home">
       <!-- Hero -->
-      <section class="relative overflow-hidden">
-        <div class="absolute inset-0 bg-gradient-to-br from-black via-black to-gold/10"></div>
-        <div class="max-w-7xl mx-auto px-6 py-24 sm:py-28 lg:py-32 relative">
+      <section class="relative">
+        <div class="max-w-7xl mx-auto px-6 py-20 sm:py-24 lg:py-28">
           <div class="max-w-3xl">
             <h1 class="font-playfair text-4xl sm:text-5xl lg:text-6xl leading-tight">
               MyFirst Fragrances
             </h1>
-            <p class="mt-4 text-lg sm:text-xl text-white/80">L'authenticité dans chaque goutte</p>
+            <p class="mt-4 text-lg sm:text-xl text-black/70">L'authenticité dans chaque goutte</p>
             <div class="mt-8 flex gap-4">
-              <a href="#shop" class="inline-flex items-center gap-2 bg-gold text-black px-6 py-3 rounded-md font-semibold shadow shadow-gold/30 hover:scale-105 transition duration-300">
+              <a href="#shop" class="inline-flex items-center gap-2 bg-black text-white px-6 py-3 rounded-md font-semibold hover:opacity-90 transition">
                 Découvrir
               </a>
-              <a href="#contact" class="inline-flex items-center gap-2 ring-1 ring-gold px-6 py-3 rounded-md hover:bg-white/5 transition duration-300">
+              <a href="#contact" class="inline-flex items-center gap-2 ring-1 ring-black px-6 py-3 rounded-md hover:bg-black/5 transition">
                 Contactez-nous
               </a>
             </div>
@@ -98,12 +97,12 @@
       <section id="shop" class="max-w-7xl mx-auto px-6 py-16">
         <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
           <h2 class="font-playfair text-3xl">Notre collection</h2>
-          <div class="flex flex-wrap gap-2">
-            <button data-filter="All" class="filter-btn bg-gold text-black px-4 py-2 rounded-md text-sm font-medium">Tous</button>
-            <button data-filter="Men" class="filter-btn ring-1 ring-gold px-4 py-2 rounded-md text-sm hover:bg-white/5">Homme</button>
-            <button data-filter="Women" class="filter-btn ring-1 ring-gold px-4 py-2 rounded-md text-sm hover:bg-white/5">Femme</button>
-            <button data-filter="Children" class="filter-btn ring-1 ring-gold px-4 py-2 rounded-md text-sm hover:bg-white/5">Enfants</button>
-            <button data-filter="Gift Sets (Coffrets)" class="filter-btn ring-1 ring-gold px-4 py-2 rounded-md text-sm hover:bg-white/5">Coffrets</button>
+          <div class="flex flex-wrap gap-2 uppercase tracking-wide text-xs">
+            <button data-filter="All" class="filter-btn bg-black text-white px-4 py-2 rounded-md">Tous</button>
+            <button data-filter="Men" class="filter-btn ring-1 ring-black px-4 py-2 rounded-md hover:bg-black hover:text-white transition">Homme</button>
+            <button data-filter="Women" class="filter-btn ring-1 ring-black px-4 py-2 rounded-md hover:bg-black hover:text-white transition">Femme</button>
+            <button data-filter="Children" class="filter-btn ring-1 ring-black px-4 py-2 rounded-md hover:bg-black hover:text-white transition">Enfants</button>
+            <button data-filter="Gift Sets (Coffrets)" class="filter-btn ring-1 ring-black px-4 py-2 rounded-md hover:bg-black hover:text-white transition">Coffrets</button>
           </div>
         </div>
 
@@ -116,15 +115,15 @@
 
       <!-- Contact / Footer CTA -->
       <section id="contact" class="max-w-7xl mx-auto px-6 pb-20">
-        <div class="rounded-xl border border-white/10 p-8 bg-white/5">
+        <div class="rounded-xl border border-black/10 p-8 bg-white">
           <h3 class="font-playfair text-2xl">Nous sommes à votre écoute</h3>
-          <p class="mt-2 text-white/80">Des questions sur nos parfums ou votre commande ? Contactez-nous sur Instagram ou WhatsApp.</p>
+          <p class="mt-2 text-black/70">Des questions sur nos parfums ou votre commande ? Contactez-nous sur Instagram ou WhatsApp.</p>
           <div class="mt-6 flex flex-wrap gap-3">
-            <a href="https://www.instagram.com/my_firstperfume?igsh=cnZzczdvenJnejAy" target="_blank" class="inline-flex items-center gap-2 ring-1 ring-gold px-5 py-2 rounded-md hover:bg-white/5 transition">
+            <a href="https://www.instagram.com/my_firstperfume?igsh=cnZzczdvenJnejAy" target="_blank" class="inline-flex items-center gap-2 ring-1 ring-black px-5 py-2 rounded-md hover:bg-black/5 transition">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5"><path d="M7.5 2.25A5.25 5.25 0 002.25 7.5v9A5.25 5.25 0 007.5 21.75h9a5.25 5.25 0 005.25-5.25v-9A5.25 5.25 0 0016.5 2.25h-9Zm8.25 3a1.5 1.5 0 110 3 1.5 1.5 0 010-3ZM12 7.5a4.5 4.5 0 100 9 4.5 4.5 0 000-9Z"/></svg>
               <span>Instagram</span>
             </a>
-            <a href="#" id="whatsAppQuick" class="inline-flex items-center gap-2 bg-gold text-black px-5 py-2 rounded-md font-semibold hover:scale-105 transition">
+            <a href="#" id="whatsAppQuick" class="inline-flex items-center gap-2 bg-black text-white px-5 py-2 rounded-md font-semibold hover:opacity-90 transition">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5"><path d="M2.25 12a9.75 9.75 0 1117.063 6.276l1.162 3.105a.75.75 0 01-.956.956l-3.105-1.162A9.75 9.75 0 012.25 12Zm9.75-6.75a6.75 6.75 0 100 13.5A6.75 6.75 0 0012 5.25Zm-.487 3.9a.75.75 0 011.066-.055c1.032.9 2.206 1.48 2.995 1.68a.75.75 0 01.55.72c0 1.69-1.42 3.11-3.17 3.11-.88 0-1.72-.37-2.32-.97-.6-.61-.93-1.43-.93-2.27 0-.49.14-.96.4-1.36a.75.75 0 01.362-.282Z"/></svg>
               <span>WhatsApp</span>
             </a>
@@ -133,27 +132,27 @@
       </section>
     </main>
 
-    <footer class="border-t border-white/10 py-8 bg-black/80">
+    <footer class="border-t border-black/10 py-8 bg-white/90">
       <div class="max-w-7xl mx-auto px-6 flex flex-col sm:flex-row items-center justify-between gap-4">
-        <p class="text-white/60">© <span id="year"></span> MyFirst Fragrances. Tous droits réservés.</p>
-        <p class="text-white/60">Créé avec passion • Parfums d'exception</p>
+        <p class="text-black/60">© <span id="year"></span> MyFirst Fragrances. Tous droits réservés.</p>
+        <p class="text-black/60">Créé avec passion • Parfums d'exception</p>
       </div>
     </footer>
 
     <!-- Product Detail Modal -->
     <div id="productModal" class="fixed inset-0 z-50 hidden">
       <div class="absolute inset-0 bg-black/70"></div>
-      <div class="relative max-w-3xl mx-auto mt-20 bg-black border border-white/10 rounded-xl overflow-hidden">
+      <div class="relative max-w-3xl mx-auto mt-20 bg-white border border-black/10 rounded-xl overflow-hidden text-black">
         <div class="flex flex-col md:flex-row">
           <img id="modalImage" class="w-full md:w-1/2 h-64 md:h-auto object-cover" src="" alt="" />
           <div class="p-6 md:w-1/2">
             <h3 id="modalTitle" class="font-playfair text-2xl"></h3>
-            <p id="modalCategory" class="mt-1 text-gold/90"></p>
-            <p id="modalDescription" class="mt-4 text-white/80"></p>
-            <p id="modalPrice" class="mt-6 text-xl font-semibold">€0</p>
+            <p id="modalCategory" class="mt-1 text-black/70"></p>
+            <p id="modalDescription" class="mt-4 text-black/80"></p>
+            <p id="modalPrice" class="mt-6 text-xl font-semibold">0 FCFA</p>
             <div class="mt-6 flex gap-3">
-              <button id="modalAddBtn" class="bg-gold text-black px-5 py-2 rounded-md font-semibold hover:scale-105 transition">Ajouter au panier</button>
-              <button data-close-modal class="ring-1 ring-white/20 px-5 py-2 rounded-md hover:bg-white/5 transition">Fermer</button>
+              <button id="modalAddBtn" class="bg-black text-white px-5 py-2 rounded-md font-semibold hover:opacity-90 transition">Ajouter au panier</button>
+              <button data-close-modal class="ring-1 ring-black px-5 py-2 rounded-md hover:bg-black/5 transition">Fermer</button>
             </div>
           </div>
         </div>
@@ -163,22 +162,22 @@
     <!-- Cart Drawer -->
     <div id="cartDrawer" class="fixed inset-0 z-50 hidden">
       <div class="absolute inset-0 bg-black/60" data-close-cart></div>
-      <aside class="absolute right-0 top-0 h-full w-full max-w-md bg-black border-l border-white/10 p-6 flex flex-col">
+      <aside class="absolute right-0 top-0 h-full w-full max-w-md bg-white border-l border-black/10 p-6 flex flex-col text-black">
         <div class="flex items-center justify-between">
           <h3 class="font-playfair text-2xl">Votre panier</h3>
-          <button data-close-cart class="p-2 rounded hover:bg-white/5">✕</button>
+          <button data-close-cart class="p-2 rounded hover:bg-black/5">✕</button>
         </div>
         <div id="cartItems" class="mt-6 flex-1 space-y-4 overflow-y-auto pr-1"></div>
-        <div class="mt-6 border-t border-white/10 pt-4">
+        <div class="mt-6 border-t border-black/10 pt-4">
           <div class="flex items-center justify-between">
-            <span class="text-white/70">Articles</span>
+            <span class="text-black/70">Articles</span>
             <span id="cartTotalQty" class="font-semibold">0</span>
           </div>
           <div class="flex items-center justify-between mt-1">
-            <span class="text-white/70">Total</span>
+            <span class="text-black/70">Total</span>
             <span id="cartTotalPrice" class="font-semibold">0 FCFA</span>
           </div>
-          <button id="checkoutBtn" class="mt-4 w-full bg-gold text-black py-3 rounded-md font-semibold hover:scale-105 transition">Passer à la commande</button>
+          <button id="checkoutBtn" class="mt-4 w-full bg-black text-white py-3 rounded-md font-semibold hover:opacity-90 transition">Passer à la commande</button>
         </div>
       </aside>
     </div>
@@ -186,18 +185,18 @@
     <!-- Checkout Summary Modal -->
     <div id="checkoutModal" class="fixed inset-0 z-50 hidden">
       <div class="absolute inset-0 bg-black/70"></div>
-      <div class="relative max-w-xl mx-auto mt-24 bg-black border border-white/10 rounded-xl p-6">
+      <div class="relative max-w-xl mx-auto mt-24 bg-white border border-black/10 rounded-xl p-6 text-black">
         <h3 class="font-playfair text-2xl">Récapitulatif de commande</h3>
         <div id="summaryItems" class="mt-4 space-y-3 max-h-72 overflow-y-auto pr-1"></div>
-        <div class="mt-4 flex items-center justify-between border-t border-white/10 pt-4">
+        <div class="mt-4 flex items-center justify-between border-t border-black/10 pt-4">
           <span>Nombre d'articles</span><span id="summaryQty" class="font-semibold">0</span>
         </div>
         <div class="flex items-center justify-between mt-1">
           <span>Montant total</span><span id="summaryPrice" class="font-semibold">0 FCFA</span>
         </div>
         <div class="mt-6 flex gap-3 justify-end">
-          <button data-close-checkout class="ring-1 ring-white/20 px-5 py-2 rounded-md hover:bg-white/5 transition">Fermer</button>
-          <button id="whatsAppOrderBtn" class="bg-gold text-black px-5 py-2 rounded-md font-semibold hover:scale-105 transition">Commander via WhatsApp</button>
+          <button data-close-checkout class="ring-1 ring-black px-5 py-2 rounded-md hover:bg-black/5 transition">Fermer</button>
+          <button id="whatsAppOrderBtn" class="bg-black text-white px-5 py-2 rounded-md font-semibold hover:opacity-90 transition">Commander via WhatsApp</button>
         </div>
       </div>
     </div>
