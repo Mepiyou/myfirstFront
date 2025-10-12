@@ -47,55 +47,60 @@
 
         <div id="editModal" class="fixed inset-0 z-50 hidden">
           <div class="absolute inset-0 bg-black/60" data-close-edit></div>
-          <div class="relative max-w-2xl mx-auto mt-16 bg-black border border-white/10 rounded-xl p-6">
-            <h3 class="font-playfair text-xl">Modifier le produit</h3>
-            <form id="editForm" class="mt-4 grid grid-cols-1 md:grid-cols-2 gap-4" enctype="multipart/form-data">
-              <input type="hidden" name="_id" />
-              <div>
-                <label class="block text-sm text-white/80">Name</label>
-                <input name="name" required class="mt-1 w-full bg-black border border-white/10 rounded px-3 py-2" />
+          <!-- Scrollable container for small screens -->
+          <div class="absolute inset-0 overflow-y-auto">
+            <div class="min-h-full flex items-start sm:items-center justify-center p-4">
+              <div class="w-full max-w-2xl bg-black border border-white/10 rounded-xl p-6">
+                <h3 class="font-playfair text-xl">Modifier le produit</h3>
+                <form id="editForm" class="mt-4 grid grid-cols-1 md:grid-cols-2 gap-4" enctype="multipart/form-data">
+                  <input type="hidden" name="_id" />
+                  <div>
+                    <label class="block text-sm text-white/80">Nom</label>
+                    <input name="name" required class="mt-1 w-full bg-black border border-white/10 rounded px-3 py-2" />
+                  </div>
+                  <div>
+                    <label class="block text-sm text-white/80">Catégorie</label>
+                    <select name="category" required class="mt-1 w-full bg-black border border-white/10 rounded px-3 py-2">
+                      <option>Men</option>
+                      <option>Women</option>
+                      <option>Children</option>
+                      <option>Gift Sets (Coffrets)</option>
+                    </select>
+                  </div>
+                  <div>
+                    <label class="block text-sm text-white/80">Prix (FCFA)</label>
+                    <input name="price" type="number" step="0.01" required class="mt-1 w-full bg-black border border-white/10 rounded px-3 py-2" />
+                  </div>
+                  <div>
+                    <label class="block text-sm text-white/80">Stock</label>
+                    <input name="stock" type="number" required class="mt-1 w-full bg-black border border-white/10 rounded px-3 py-2" />
+                  </div>
+                  <div class="md:col-span-2">
+                    <label class="block text-sm text-white/80">Description</label>
+                    <textarea name="description" rows="3" class="mt-1 w-full bg-black border border-white/10 rounded px-3 py-2"></textarea>
+                  </div>
+                  <div>
+                    <label class="block text-sm text-white/80">Promotion</label>
+                    <select name="isPromotion" class="mt-1 w-full bg-black border border-white/10 rounded px-3 py-2">
+                      <option value="false">No</option>
+                      <option value="true">Yes</option>
+                    </select>
+                  </div>
+                  <div>
+                    <label class="block text-sm text-white/80">Image (fichier)</label>
+                    <input name="image" type="file" accept="image/*" class="mt-1 w-full" />
+                  </div>
+                  <div class="md:col-span-2">
+                    <label class="block text-sm text-white/80">Ou URL d'image</label>
+                    <input name="imageUrl" type="url" placeholder="https://..." class="mt-1 w-full bg-black border border-white/10 rounded px-3 py-2" />
+                  </div>
+                  <div class="md:col-span-2 flex justify-end gap-3">
+                    <button type="button" data-close-edit class="ring-1 ring-white/20 px-4 py-2 rounded hover:bg-white/5">Annuler</button>
+                    <button class="bg-gold text-black px-5 py-2 rounded font-semibold hover:scale-105">Enregistrer</button>
+                  </div>
+                </form>
               </div>
-              <div>
-                <label class="block text-sm text-white/80">Category</label>
-                <select name="category" required class="mt-1 w-full bg-black border border-white/10 rounded px-3 py-2">
-                  <option>Men</option>
-                  <option>Women</option>
-                  <option>Children</option>
-                  <option>Gift Sets (Coffrets)</option>
-                </select>
-              </div>
-              <div>
-                <label class="block text-sm text-white/80">Price (€)</label>
-                <input name="price" type="number" step="0.01" required class="mt-1 w-full bg-black border border-white/10 rounded px-3 py-2" />
-              </div>
-              <div>
-                <label class="block text-sm text-white/80">Stock</label>
-                <input name="stock" type="number" required class="mt-1 w-full bg-black border border-white/10 rounded px-3 py-2" />
-              </div>
-              <div class="md:col-span-2">
-                <label class="block text-sm text-white/80">Description</label>
-                <textarea name="description" rows="3" class="mt-1 w-full bg-black border border-white/10 rounded px-3 py-2"></textarea>
-              </div>
-              <div>
-                <label class="block text-sm text-white/80">Promotion</label>
-                <select name="isPromotion" class="mt-1 w-full bg-black border border-white/10 rounded px-3 py-2">
-                  <option value="false">No</option>
-                  <option value="true">Yes</option>
-                </select>
-              </div>
-              <div>
-                <label class="block text-sm text-white/80">Image (file)</label>
-                <input name="image" type="file" accept="image/*" class="mt-1 w-full" />
-              </div>
-              <div class="md:col-span-2">
-                <label class="block text-sm text-white/80">Ou URL d'image</label>
-                <input name="imageUrl" type="url" placeholder="https://..." class="mt-1 w-full bg-black border border-white/10 rounded px-3 py-2" />
-              </div>
-              <div class="md:col-span-2 flex justify-end gap-3">
-                <button type="button" data-close-edit class="ring-1 ring-white/20 px-4 py-2 rounded hover:bg-white/5">Annuler</button>
-                <button class="bg-gold text-black px-5 py-2 rounded font-semibold hover:scale-105">Enregistrer</button>
-              </div>
-            </form>
+            </div>
           </div>
         </div>
         <!-- Products table -->
