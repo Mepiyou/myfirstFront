@@ -146,7 +146,60 @@ async function fetchProductsAdmin() {
   const res = await fetch(`${API_BASE}/api/products`);
   if (!res.ok) throw new Error('Failed to load products');
   const payload = await res.json();
-  return Array.isArray(payload.data) ? payload.data : payload;
+
+  return list.filter(p => p.name !== '__SITE_CONFIG__');
+}
+
+async function fetchSiteConfig() {
+  try {
+    const res = await fetch(`${API_BASE}/api/products`);
+    if (!res.ok) return { theme: 'default' };
+    const payload = await res.json();
+    const list = Array.isArray(payload.data) ? payload.data : payload;
+    const configProduct = list.find(p => p.name === '__SITE_CONFIG__');
+    if (!configProduct) return { theme: 'default', _id: null };
+    
+    try {
+      return { ...JSON.parse(configProduct.description), _id: configProduct._id };
+    } catch {
+      return { theme: 'default', _id: configProduct._id };
+    }
+  } catch {
+    return { theme: 'default' };
+  }
+}
+
+async function saveSiteConfig(settings) {
+  const current = await fetchSiteConfig();
+  const body = new FormData();
+  body.append('name', '__SITE_CONFIG__');
+  body.append('category', 'System');
+  body.append('price', '0');
+  body.append('stock', '0');
+  body.append('isPromotion', 'false');
+  body.append('description', JSON.stringify(settings));
+  // Dummy image for validation if needed, or rely on existing
+  // Not sending image might fail if backend enforces it on create, 
+  // but for update it might be fine. We'll try update if ID exists.
+  
+  if (current._id) {
+    const res = await fetch(`${API_BASE}/api/admin/products/${current._id}`, {
+      method: 'PUT',
+      headers: authHeaders(),
+      body
+    });
+    if (!res.ok) throw new Error('Échec sauvegarde config');
+  } else {
+    // Create
+    // If backend requires image, we might need a workaround or existing URL
+    body.append('imageUrl', 'https://via.placeholder.com/10'); 
+    const res = await fetch(`${API_BASE}/api/admin/products`, {
+      method: 'POST',
+      headers: authHeaders(),
+      body
+    });
+    if (!res.ok) throw new Error('Échec création config');
+  }
 }
 
 function formatFCFA(n) { return new Intl.NumberFormat('fr-FR', { style: 'currency', currency: 'XOF', currencyDisplay: 'code' }).format(n).replace('XOF', 'FCFA'); }
@@ -413,6 +466,27 @@ function onDashboardPage() {
   bindTabs();
   bindAddForm();
   bindLogout();
+  
+  // Settings Logic
+  const settingsForm = document.getElementById('settingsForm');
+  if (settingsForm) {
+    // Load current
+    fetchSiteConfig().then(cfg => {
+      document.getElementById('themeSelect').value = cfg.theme || 'default';
+    });
+    
+    settingsForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      try {
+        const theme = document.getElementById('themeSelect').value;
+        await saveSiteConfig({ theme });
+        toast('Thème sauvegardé !');
+      } catch (err) {
+        toast('Erreur sauvegarde', false);
+      }
+    });
+  }
+
   document.getElementById('refreshBtn')?.addEventListener('click', loadProducts);
   loadProducts();
   return true;

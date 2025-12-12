@@ -9,6 +9,59 @@ const state = {
   selected: null,
 };
 
+function applyTheme(theme) {
+  const root = document.documentElement;
+  // Reset
+  root.style.setProperty('--theme-primary', '#D4AF37'); // Gold
+  root.style.setProperty('--theme-bg', '#FFFFFF');
+  
+  // Tailwind overrides via JS (manipulating classes on body)
+  const body = document.body;
+  body.className = "bg-white text-black transition-colors duration-500"; // Reset base
+
+  switch(theme) {
+    case 'christmas':
+      body.classList.add('theme-christmas');
+      // We can inject styles dynamically or toggle classes
+      // Simple visual change: Red accent, green hints?
+      document.querySelectorAll('.bg-black').forEach(el => {
+        el.classList.remove('bg-black');
+        el.classList.add('bg-red-800');
+      });
+      document.querySelectorAll('.text-black').forEach(el => {
+        // el.classList.remove('text-black');
+        // el.classList.add('text-green-900');
+      });
+      break;
+    case 'newyear':
+      body.classList.add('theme-newyear');
+      // Sparkle / Silver
+      break;
+    case 'valentine':
+      body.classList.add('theme-valentine');
+      document.querySelectorAll('.bg-black').forEach(el => {
+        el.classList.remove('bg-black');
+        el.classList.add('bg-pink-600');
+      });
+      break;
+     case 'birthday':
+       body.classList.add('theme-birthday');
+       break;
+     case 'blackfriday':
+       body.classList.add('theme-blackfriday');
+       body.classList.remove('bg-white', 'text-black');
+       body.classList.add('bg-zinc-900', 'text-white');
+       document.querySelectorAll('.bg-black').forEach(el => {
+         el.classList.remove('bg-black');
+         el.classList.add('bg-red-600');
+       });
+       break;
+      case 'sales':
+        body.classList.add('theme-sales');
+        break;
+  }
+}
+
 function showState(message, isError = false) {
   const box = document.getElementById('stateBox');
   if (!box) return;
@@ -143,7 +196,20 @@ async function fetchProducts() {
     const res = await fetch(`${API_BASE}/api/products`);
     if (!res.ok) throw new Error('Failed to fetch products');
     const payload = await res.json();
-    state.products = Array.isArray(payload.data) ? payload.data : payload;
+    const allProducts = Array.isArray(payload.data) ? payload.data : payload;
+    
+    // Theme Logic
+    const config = allProducts.find(p => p.name === '__SITE_CONFIG__');
+    if (config) {
+      try {
+        const settings = JSON.parse(config.description);
+        applyTheme(settings.theme);
+      } catch (e) {
+        console.error('Bad config', e);
+      }
+    }
+
+    state.products = allProducts.filter(p => p.name !== '__SITE_CONFIG__');
     state.filtered = state.products;
     hideState();
     renderGrid();
