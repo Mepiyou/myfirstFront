@@ -1,0 +1,21 @@
+{
+  "name": "MyFirst Fragrances",
+  "short_name": "MyFirst",
+  "start_url": "/index.html",
+  "display": "standalone",
+  "background_color": "#FFFFFF",
+  "theme_color": "#D4AF37",
+  "description": "Premium fragrances for Men, Women, Children and Gift Sets.",
+  "icons": [
+    {
+      "src": "assets/logo.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "assets/logo.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
