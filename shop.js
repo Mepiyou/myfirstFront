@@ -136,17 +136,15 @@ function productCard(p) {
         </button>
       </div>
       
-      <div class="mt-3 flex justify-between items-start px-0.5">
-        <div>
-           <h3 class="text-xs uppercase tracking-widest font-medium text-black/90 truncate pr-2">${p.name}</h3>
-           <p class="text-[10px] text-black/60 uppercase tracking-wide mt-0.5">${p.category || 'Fragrance'}</p>
-        </div>
-        <span class="text-xs font-semibold tracking-wide">${fcfa(p.price)}</span>
+      <div class="mt-2.5 px-0.5 space-y-1">
+        <h3 class="text-[11px] leading-tight uppercase tracking-widest font-medium text-black/90 truncate">${p.name}</h3>
+        <p class="text-[10px] text-black/50 uppercase tracking-wide">${p.category || 'Fragrance'}</p>
+        <p class="text-[11px] font-semibold tracking-wide pt-0.5">${fcfa(p.price)}</p>
       </div>
       
-      <!-- Mobile Add Button (Visible always on mobile) -->
+      <!-- Mobile Add Button -->
        <button data-add="${p._id}" onclick="event.stopPropagation(); window.addToCart({ _id: '${p._id}', name: '${p.name.replace(/'/g, "\\'")}', price: ${p.price}, image: '${p.image}' })" 
-          class="mt-3 w-full bg-black text-white text-xs uppercase tracking-widest py-3 font-medium md:hidden focus:bg-gray-800">
+          class="mt-3 w-full border border-black text-black text-[10px] uppercase tracking-widest py-2.5 font-medium md:hidden hover:bg-black hover:text-white transition">
           Ajouter
         </button>
     </div>
