@@ -146,7 +146,7 @@ async function fetchProductsAdmin() {
   const res = await fetch(`${API_BASE}/api/products`);
   if (!res.ok) throw new Error('Failed to load products');
   const payload = await res.json();
-
+  const list = Array.isArray(payload.data) ? payload.data : payload;
   return list.filter(p => p.name !== '__SITE_CONFIG__');
 }
 
