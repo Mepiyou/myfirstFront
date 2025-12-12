@@ -9,6 +9,127 @@ const state = {
   selected: null,
 };
 
+// Helper for Theme Banners
+function getThemeBanner(theme) {
+  const commonClasses = 'mb-8 rounded-xl p-6 relative overflow-hidden shadow-lg';
+  const snowEffect = '<div class="absolute inset-0 opacity-10 pointer-events-none" style="background-image: radial-gradient(circle, white 2px, transparent 2.5px); background-size: 24px 24px;"></div>';
+  
+  switch(theme) {
+    case 'christmas':
+      return {
+        id: 'theme-banner',
+        className: `${commonClasses} bg-red-800 text-white`,
+        html: `
+          <div class="relative z-10 flex flex-col md:flex-row items-center justify-between gap-4">
+            <div class="text-center md:text-left">
+              <h2 class="font-playfair text-3xl font-bold mb-2">Joyeux Noël !</h2>
+              <p class="text-red-100">Découvrez nos coffrets cadeaux exclusifs pour les fêtes.</p>
+            </div>
+            <!-- Gift Icon SVG -->
+            <div class="w-16 h-16 text-white cursor-pointer hover:scale-110 transition animate-bounce" onclick="document.getElementById('productsGrid').scrollIntoView({behavior: 'smooth', block: 'start'})">
+             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-full h-full">
+               <path stroke-linecap="round" stroke-linejoin="round" d="M21 11.25v8.25a1.5 1.5 0 0 1-1.5 1.5H4.5a1.5 1.5 0 0 1-1.5-1.5v-8.25M12 4.875A2.625 2.625 0 1 0 9.375 7.5H12m0-2.625V7.5m0-2.625A2.625 2.625 0 1 1 14.625 7.5H12m0 0V21m-8.625-9.75h18c.621 0 1.125-.504 1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125h-18c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125Z" />
+             </svg>
+            </div>
+          </div>
+          ${snowEffect}
+        `
+      };
+    case 'newyear':
+      return {
+        id: 'theme-banner',
+        className: `${commonClasses} bg-gray-900 text-gold border border-gold/30`,
+        html: `
+          <div class="relative z-10 flex flex-col md:flex-row items-center justify-between gap-4">
+            <div class="text-center md:text-left">
+              <h2 class="font-playfair text-3xl font-bold mb-2 text-[#D4AF37]">Bonne Année ! ✨</h2>
+              <p class="text-[#D4AF37]/80">Commencez l'année avec élégance.</p>
+            </div>
+             <div class="w-16 h-16 text-[#D4AF37] animate-pulse">
+               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-full h-full">
+                 <path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904 9 18.75l-.813-2.846a4.5 4.5 0 0 0-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 0 0 3.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 0 0 3.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 0 0-3.09 3.09ZM18.259 8.715 18 9.75l-.259-1.035a3.375 3.375 0 0 0-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 0 0 2.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 0 0 2.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 0 0-2.456 2.456ZM16.894 20.567 16.5 21.75l-.394-1.183a2.25 2.25 0 0 0-1.423-1.423L13.5 18.75l1.183-.394a2.25 2.25 0 0 0 1.423-1.423l.394-1.183.394 1.183a2.25 2.25 0 0 0 1.423 1.423l1.183.394-1.183.394a2.25 2.25 0 0 0-1.423 1.423Z" />
+               </svg>
+             </div>
+          </div>
+        `
+      };
+    case 'valentine':
+      return {
+        id: 'theme-banner',
+        className: `${commonClasses} bg-pink-100 text-red-600 border border-red-200`,
+        html: `
+          <div class="relative z-10 flex flex-col md:flex-row items-center justify-between gap-4">
+            <div class="text-center md:text-left">
+              <h2 class="font-playfair text-3xl font-bold mb-2">Saint Valentin ❤️</h2>
+              <p class="text-red-500">Offrez de l'amour, offrez un parfum.</p>
+            </div>
+             <div class="w-16 h-16 text-red-500 animate-bounce">
+               <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" class="w-full h-full">
+                 <path d="M11.645 20.91l-.007-.003-.022-.012a15.247 15.247 0 01-.383-.218 25.18 25.18 0 01-4.244-3.17C4.688 15.36 2.25 12.174 2.25 8.25 2.25 5.322 4.714 3 7.688 3A5.5 5.5 0 0112 5.052 5.5 5.5 0 0116.313 3c2.973 0 5.437 2.322 5.437 5.25 0 3.925-2.438 7.111-4.739 9.256a25.175 25.175 0 01-4.244 3.17 15.247 15.247 0 01-.383.219l-.022.012-.007.004-.003.001a.752.752 0 01-.704 0l-.003-.001z" />
+               </svg>
+             </div>
+          </div>
+        `
+      };
+    case 'birthday':
+        return {
+        id: 'theme-banner',
+        className: `${commonClasses} bg-indigo-600 text-white`,
+        html: `
+          <div class="relative z-10 flex flex-col md:flex-row items-center justify-between gap-4">
+            <div class="text-center md:text-left">
+              <h2 class="font-playfair text-3xl font-bold mb-2">Joyeux Anniversaire ! 🎂</h2>
+              <p class="text-indigo-100">Fêtez ça avec une fragrance inoubliable.</p>
+            </div>
+             <div class="w-16 h-16 text-white animate-pulse">
+               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-full h-full">
+                 <path stroke-linecap="round" stroke-linejoin="round" d="M12 8.25v-1.5m0 1.5c-1.355 0-2.697.056-4.024.166C6.845 8.51 6 9.473 6 10.608v2.513m6-4.871c1.355 0 2.697.056 4.024.166C17.155 8.51 18 9.473 18 10.608v2.513M15 8.25v-1.5m-6 1.5v-1.5m12 9.75-1.5.75a3.354 3.354 0 0 1-3 0 3.354 3.354 0 0 0-3 0 3.354 3.354 0 0 1-3 0 3.354 3.354 0 0 0-3 0 3.354 3.354 0 0 1-3 0L1.5 21m21-11.25V21a2.25 2.25 0 0 1-2.25 2.25h-13.5A2.25 2.25 0 0 1 1.5 21V9.75m19.5 0a2.25 2.25 0 0 0-1.936-2.247.588.588 0 0 0-.064 0H4.5a.588.588 0 0 0-.064 0A2.25 2.25 0 0 0 1.5 9.75" />
+               </svg>
+             </div>
+          </div>
+        `
+      };
+    case 'blackfriday':
+      return {
+        id: 'theme-banner',
+        className: `${commonClasses} bg-zinc-900 text-red-500 border border-red-600`,
+        html: `
+          <div class="relative z-10 flex flex-col md:flex-row items-center justify-between gap-4">
+            <div class="text-center md:text-left">
+              <h2 class="font-playfair text-3xl font-bold mb-2">BLACK FRIDAY</h2>
+              <p class="text-white">Prix cassés sur toute la collection !</p>
+            </div>
+             <div class="w-16 h-16 text-red-600 animate-pulse">
+               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-full h-full">
+                 <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" /> <!-- Clock icon for limited time -->
+               </svg>
+             </div>
+          </div>
+        `
+      };
+    case 'sales':
+      return {
+        id: 'theme-banner',
+        className: `${commonClasses} bg-yellow-400 text-black`,
+        html: `
+          <div class="relative z-10 flex flex-col md:flex-row items-center justify-between gap-4">
+            <div class="text-center md:text-left">
+              <h2 class="font-playfair text-3xl font-black mb-2">SOLDES 🔥</h2>
+              <p class="font-medium">Jusqu'à -50% sur une sélection.</p>
+            </div>
+             <div class="w-16 h-16 text-black rotate-12">
+               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-full h-full">
+                 <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v12m-3-2.818.879.659c1.171.879 3.07.879 4.242 0 1.172-.879 1.172-2.303 0-3.182C13.536 12.219 12.768 12 12 12c-.725 0-1.45-.22-2.003-.659-1.106-.879-1.106-2.303 0-3.182s2.9-.879 4.006 0l.415.33M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+               </svg>
+             </div>
+          </div>
+        `
+      };
+    default:
+      return null;
+  }
+}
+
 function applyTheme(theme) {
   const root = document.documentElement;
   // Reset
@@ -19,38 +140,30 @@ function applyTheme(theme) {
   const body = document.body;
   body.className = "bg-white text-black transition-colors duration-500"; // Reset base
 
-  switch(theme) {
+  // Manage Banner
+  const container = document.querySelector('main');
+  const existingBanner = document.getElementById('theme-banner') || document.getElementById('xmas-banner'); // support old id too
+  if (existingBanner) existingBanner.remove();
 
+  const bannerConfig = getThemeBanner(theme);
+  if (container && bannerConfig) {
+      const banner = document.createElement('div');
+      banner.id = bannerConfig.id;
+      banner.className = bannerConfig.className;
+      banner.innerHTML = bannerConfig.html;
+      
+      const grid = document.getElementById('productsGrid');
+      if (grid) {
+           // Insert before grid (visually below filters if layout permits, or above)
+           // For simple layout, insert at top of main
+           container.insertBefore(banner, container.children[0]); 
+      }
+  }
+
+  // Theme Specific Style overrides
+  switch(theme) {
     case 'christmas':
       body.classList.add('theme-christmas');
-      
-      // Inject Christmas Banner
-      const container = document.querySelector('main');
-      if (container && !document.getElementById('xmas-banner')) {
-        const banner = document.createElement('div');
-        banner.id = 'xmas-banner';
-        banner.className = 'mb-8 bg-red-800 text-white rounded-xl p-6 relative overflow-hidden shadow-lg';
-        banner.innerHTML = `
-          <div class="relative z-10 flex flex-col md:flex-row items-center justify-between gap-4">
-            <div class="text-center md:text-left">
-              <h2 class="font-playfair text-3xl font-bold mb-2">Joyeux Noël ! 🎄</h2>
-              <p class="text-red-100">Découvrez nos coffrets cadeaux exclusifs pour les fêtes.</p>
-            </div>
-            <div class="text-4xl animate-bounce cursor-pointer hover:scale-110 transition" onclick="document.getElementById('productsGrid').scrollIntoView({behavior: 'smooth', block: 'start'})">🎁</div>
-          </div>
-          <!-- Snow effect base -->
-          <div class="absolute inset-0 opacity-10 pointer-events-none" style="background-image: radial-gradient(circle, white 2px, transparent 2.5px); background-size: 24px 24px;"></div>
-        `;
-        // Insert before the filter logic or grid (assuming grid is inside main)
-        const grid = document.getElementById('productsGrid');
-        if (grid) {
-             // Try to insert before the filters if reachable, or just before grid
-             const parent = grid.parentElement;
-             // We want it at the top of main roughly
-             container.insertBefore(banner, container.children[0]); 
-        }
-      }
-      
       document.querySelectorAll('.bg-black').forEach(el => {
         el.classList.remove('bg-black');
         el.classList.add('bg-red-800');
@@ -67,9 +180,7 @@ function applyTheme(theme) {
         el.classList.add('bg-pink-600');
       });
       break;
-     case 'birthday':
-       body.classList.add('theme-birthday');
-       break;
+      // ... (other cases handled by CSS classes mostly or shared logic)
      case 'blackfriday':
        body.classList.add('theme-blackfriday');
        body.classList.remove('bg-white', 'text-black');
@@ -79,9 +190,6 @@ function applyTheme(theme) {
          el.classList.add('bg-red-600');
        });
        break;
-      case 'sales':
-        body.classList.add('theme-sales');
-        break;
   }
 }
 
@@ -142,13 +250,7 @@ function productCard(p) {
   const img = p.image || 'https://via.placeholder.com/600x800?text=Perfume';
   const out = Number(p.stock || 0) <= 0;
   
-  // Christmas Decoration Logic
-  const isChristmas = document.body.classList.contains('theme-christmas');
-  const christmasBadge = isChristmas ? '<span class="absolute top-2 right-2 text-xl z-20 drop-shadow-md">🎄</span>' : '';
-
-  return `
     <div class="group cursor-pointer relative" onclick="openProductModal(state.products.find(x => x._id === '${p._id}'))">
-      ${christmasBadge}
       <div class="relative aspect-[3/4] overflow-hidden bg-neutral-100">
         <img src="${img}" alt="${p.name}" loading="lazy" class="w-full h-full object-cover transition duration-700 group-hover:scale-105 ${out ? 'opacity-70 grayscale' : ''}" />
         ${p.isPromotion ? '<span class="absolute bottom-2 left-2 bg-white/90 backdrop-blur text-black text-[10px] uppercase font-bold px-2 py-1 tracking-wider">Promo</span>' : ''}
