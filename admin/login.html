@@ -1,55 +1,85 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Admin Login — MyFirst Fragrances</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet" />
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-      tailwind.config = { theme: { extend: { colors: { gold: '#D4AF37' } , fontFamily: { inter:['Inter','sans-serif'], playfair:['Playfair Display','serif'] } } } }
-    </script>
-    <link rel="icon" href="../assets/favicon.ico" />
-    <style>
-      body { font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif; }
-      .field {
-        background-color: #fff;
-        color: #000;
-        border: 1px solid rgba(0,0,0,0.1);
-        border-radius: 0.5rem;
-        padding: 0.5rem 0.75rem;
-        transition: box-shadow .2s ease, border-color .2s ease;
-      }
-      .field:focus { outline: 2px solid #000; outline-offset: 2px; }
-      .field[disabled] { background-color: #f5f5f5; color: #888; }
-    </style>
-  </head>
-  <body class="min-h-screen bg-white text-black grid place-items-center p-6">
-    <div class="w-full max-w-md bg-white border border-black/10 rounded-xl p-8">
-      <h1 class="font-playfair text-3xl text-center">Connexion Admin</h1>
-      <p class="text-black/70 text-center mt-2">Accédez au tableau de bord</p>
 
-      <form id="loginForm" class="mt-8 space-y-4">
-        <div>
-          <label class="block text-sm text-black/80">Email</label>
-          <input id="email" type="email" required class="mt-1 w-full field" placeholder="admin@example.com" />
-        </div>
-        <div>
-          <label class="block text-sm text-black/80">Mot de passe</label>
-          <input id="password" type="password" required class="mt-1 w-full field" placeholder="••••••••" />
-        </div>
-        <button id="loginBtn" class="w-full bg-black text-white py-2 rounded font-semibold hover:opacity-90 transition flex items-center justify-center gap-2">
-          <span>Se connecter</span>
-          <svg id="loginSpinner" class="w-5 h-5 animate-spin hidden" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-            <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"></path>
-          </svg>
-        </button>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin Login — MyFirst Fragrances</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap"
+    rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = { theme: { extend: { colors: { gold: '#D4AF37' }, fontFamily: { inter: ['Inter', 'sans-serif'], playfair: ['Playfair Display', 'serif'] } } } }
+  </script>
+  <link rel="icon" href="../assets/favicon.ico" />
+  <link rel="manifest" href="../manifest.json">
+  <meta name="theme-color" content="#D4AF37">
+  <style>
+    body {
+      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+    }
+
+    .field {
+      background-color: #fff;
+      color: #000;
+      border: 1px solid rgba(0, 0, 0, 0.1);
+      border-radius: 0.5rem;
+      padding: 0.5rem 0.75rem;
+      transition: box-shadow .2s ease, border-color .2s ease;
+    }
+
+    .field:focus {
+      outline: 2px solid #000;
+      outline-offset: 2px;
+    }
+
+    .field[disabled] {
+      background-color: #f5f5f5;
+      color: #888;
+    }
+  </style>
+</head>
+
+<body class="min-h-screen bg-white text-black grid place-items-center p-6">
+  <div class="w-full max-w-md bg-white border border-black/10 rounded-xl p-8">
+    <h1 class="font-playfair text-3xl text-center">Connexion Admin</h1>
+    <p class="text-black/70 text-center mt-2">Accédez au tableau de bord</p>
+
+    <form id="loginForm" class="mt-8 space-y-4">
+      <div>
+        <label class="block text-sm text-black/80">Email</label>
+        <input id="email" type="email" required class="mt-1 w-full field" placeholder="admin@example.com" />
+      </div>
+      <div>
+        <label class="block text-sm text-black/80">Mot de passe</label>
+        <input id="password" type="password" required class="mt-1 w-full field" placeholder="••••••••" />
+      </div>
+      <button id="loginBtn"
+        class="w-full bg-black text-white py-2 rounded font-semibold hover:opacity-90 transition flex items-center justify-center gap-2">
+        <span>Se connecter</span>
+        <svg id="loginSpinner" class="w-5 h-5 animate-spin hidden" viewBox="0 0 24 24" fill="none"
+          xmlns="http://www.w3.org/2000/svg">
+          <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+          <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"></path>
+        </svg>
+      </button>
 
       <p id="loginMsg" class="mt-4 text-center text-sm text-red-500 hidden">Identifiants invalides</p>
-    </div>
-    </div>
+  </div>
+  </div>
 
-    <script src="./admin.js"></script>
-  </body>
+  <script src="./admin.js"></script>
+  <script src="./admin.js"></script>
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('../service-worker.js', { scope: '/' })
+          .then(reg => console.log('SW registered'))
+          .catch(err => console.log('SW registration failed', err));
+      });
+    }
+  </script>
+</body>
+
 </html>
