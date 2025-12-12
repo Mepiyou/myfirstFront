@@ -1,207 +1,248 @@
 <!DOCTYPE html>
 <html lang="en" class="scroll-smooth">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>MyFirst Fragrances — Authenticity in Every Drop</title>
-    <meta name="description" content="Premium fragrances for Men, Women, Children and Gift Sets. Authenticity in Every Drop." />
 
-    <!-- Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet" />
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MyFirst Fragrances — Authenticity in Every Drop</title>
+  <meta name="description"
+    content="Premium fragrances for Men, Women, Children and Gift Sets. Authenticity in Every Drop." />
 
-    <!-- TailwindCSS CDN -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-      tailwind.config = {
-        theme: {
-          extend: {
-            colors: {
-              gold: '#D4AF37',
-              black: '#000000',
-              white: '#FFFFFF'
-            },
-            fontFamily: {
-              inter: ['Inter', 'system-ui', 'Avenir', 'Helvetica', 'Arial', 'sans-serif'],
-              playfair: ['Playfair Display', 'Georgia', 'serif']
-            }
+  <!-- Fonts -->
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap"
+    rel="stylesheet" />
+
+  <!-- TailwindCSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            gold: '#D4AF37',
+            black: '#000000',
+            white: '#FFFFFF'
+          },
+          fontFamily: {
+            inter: ['Inter', 'system-ui', 'Avenir', 'Helvetica', 'Arial', 'sans-serif'],
+            playfair: ['Playfair Display', 'Georgia', 'serif']
           }
         }
       }
-    </script>
+    }
+  </script>
 
-    <link rel="icon" href="assets/favicon.ico" />
-    <style>
-      body { font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif; }
-    </style>
-  </head>
-  <body class="bg-white text-black">
-    <!-- Navbar -->
-    <header class="fixed top-0 inset-x-0 z-40 bg-white/90 backdrop-blur border-b border-black/10">
-      <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="flex h-16 items-center justify-between">
-          <a href="#" class="flex items-center gap-3">
-            <img src="assets/logo.png" alt="MyFirst Fragrances" class="w-8 h-8 rounded-full ring-1 ring-black/20" />
-            <span class="font-playfair text-xl tracking-wide">MyFirst Fragrances</span>
+  <link rel="icon" href="assets/favicon.ico" />
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#D4AF37">
+  <style>
+    body {
+      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+    }
+  </style>
+</head>
+
+<body class="bg-white text-black">
+  <!-- Navbar -->
+  <header class="fixed top-0 inset-x-0 z-40 bg-white/90 backdrop-blur border-b border-black/10">
+    <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex h-16 items-center justify-between">
+        <a href="#" class="flex items-center gap-3">
+          <img src="assets/logo.png" alt="MyFirst Fragrances" class="w-8 h-8 rounded-full ring-1 ring-black/20" />
+          <span class="font-playfair text-xl tracking-wide">MyFirst Fragrances</span>
+        </a>
+        <div class="hidden md:flex items-center gap-8 uppercase tracking-wide text-sm">
+          <a href="#home" class="hover:opacity-70 transition">Accueil</a>
+          <a href="#shop" class="hover:opacity-70 transition">Boutique</a>
+          <a href="#contact" class="hover:opacity-70 transition">Contact</a>
+        </div>
+        <div class="flex items-center gap-4">
+          <button id="cartBtn" class="relative p-2 rounded-full ring-1 ring-black/20 hover:ring-black/60 transition">
+            <span class="sr-only">Ouvrir le panier</span>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+              stroke="currentColor" class="w-6 h-6">
+              <path stroke-linecap="round" stroke-linejoin="round"
+                d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 1 0 0 6 3 3 0 0 0 0-6Zm9-9h3.11c.86 0 1.5.792 1.332 1.636l-1.2 6A1.5 1.5 0 0 1 18.266 14.25H8.22a1.5 1.5 0 0 1-1.463-1.154L5.106 5.272M21 21a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+            </svg>
+            <span id="cartCount"
+              class="absolute -top-1 -right-1 bg-black text-white text-xs font-semibold w-5 h-5 grid place-content-center rounded-full">0</span>
+          </button>
+          <button id="mobileMenuBtn" class="md:hidden p-2 rounded hover:bg-black/5">
+            <span class="sr-only">Ouvrir le menu</span>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+              stroke="currentColor" class="w-6 h-6">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+            </svg>
+          </button>
+        </div>
+      </div>
+      <div id="mobileMenu" class="md:hidden hidden pb-4 uppercase tracking-wide text-sm">
+        <a href="#home" class="block py-2 hover:opacity-70">Accueil</a>
+        <a href="#shop" class="block py-2 hover:opacity-70">Boutique</a>
+        <a href="#contact" class="block py-2 hover:opacity-70">Contact</a>
+      </div>
+    </nav>
+  </header>
+
+  <main class="pt-16" id="home">
+    <!-- Hero -->
+    <section class="relative">
+      <div class="max-w-7xl mx-auto px-6 py-20 sm:py-24 lg:py-28">
+        <div class="max-w-3xl">
+          <h1 class="font-playfair text-4xl sm:text-5xl lg:text-6xl leading-tight">
+            MyFirst Fragrances
+          </h1>
+          <p class="mt-4 text-lg sm:text-xl text-black/70">L'authenticité dans chaque goutte</p>
+          <div class="mt-8 flex gap-4">
+            <a href="#shop"
+              class="inline-flex items-center gap-2 bg-black text-white px-6 py-3 rounded-md font-semibold hover:opacity-90 transition">
+              Découvrir
+            </a>
+            <a href="#contact"
+              class="inline-flex items-center gap-2 ring-1 ring-black px-6 py-3 rounded-md hover:bg-black/5 transition">
+              Contactez-nous
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Shop / Filters -->
+    <section id="shop" class="max-w-7xl mx-auto px-6 py-16">
+      <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+        <h2 class="font-playfair text-3xl">Notre collection</h2>
+        <div class="flex flex-wrap gap-2 uppercase tracking-wide text-xs">
+          <button data-filter="All" class="filter-btn bg-black text-white px-4 py-2 rounded-md">Tous</button>
+          <button data-filter="Men"
+            class="filter-btn ring-1 ring-black px-4 py-2 rounded-md hover:bg-black hover:text-white transition">Homme</button>
+          <button data-filter="Women"
+            class="filter-btn ring-1 ring-black px-4 py-2 rounded-md hover:bg-black hover:text-white transition">Femme</button>
+          <button data-filter="Children"
+            class="filter-btn ring-1 ring-black px-4 py-2 rounded-md hover:bg-black hover:text-white transition">Enfants</button>
+          <button data-filter="Gift Sets (Coffrets)"
+            class="filter-btn ring-1 ring-black px-4 py-2 rounded-md hover:bg-black hover:text-white transition">Coffrets</button>
+        </div>
+      </div>
+
+      <!-- Grid -->
+      <div id="productsGrid" class="mt-8 grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6"></div>
+
+      <!-- Loading / Error -->
+      <div id="stateBox" class="mt-8 text-center text-white/70 hidden"></div>
+    </section>
+
+    <!-- Contact / Footer CTA -->
+    <section id="contact" class="max-w-7xl mx-auto px-6 pb-20">
+      <div class="rounded-xl border border-black/10 p-8 bg-white">
+        <h3 class="font-playfair text-2xl">Nous sommes à votre écoute</h3>
+        <p class="mt-2 text-black/70">Des questions sur nos parfums ou votre commande ? Contactez-nous sur Instagram ou
+          WhatsApp.</p>
+        <div class="mt-6 flex flex-wrap gap-3">
+          <a href="https://www.instagram.com/my_firstperfume?igsh=cnZzczdvenJnejAy" target="_blank"
+            class="inline-flex items-center gap-2 ring-1 ring-black px-5 py-2 rounded-md hover:bg-black/5 transition">
+            <img src="assets/instagram.svg" alt="Instagram" class="w-5 h-5 object-contain" />
+            <span>Instagram</span>
           </a>
-          <div class="hidden md:flex items-center gap-8 uppercase tracking-wide text-sm">
-            <a href="#home" class="hover:opacity-70 transition">Accueil</a>
-            <a href="#shop" class="hover:opacity-70 transition">Boutique</a>
-            <a href="#contact" class="hover:opacity-70 transition">Contact</a>
-          </div>
-          <div class="flex items-center gap-4">
-            <button id="cartBtn" class="relative p-2 rounded-full ring-1 ring-black/20 hover:ring-black/60 transition">
-              <span class="sr-only">Ouvrir le panier</span>
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 1 0 0 6 3 3 0 0 0 0-6Zm9-9h3.11c.86 0 1.5.792 1.332 1.636l-1.2 6A1.5 1.5 0 0 1 18.266 14.25H8.22a1.5 1.5 0 0 1-1.463-1.154L5.106 5.272M21 21a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
-              </svg>
-              <span id="cartCount" class="absolute -top-1 -right-1 bg-black text-white text-xs font-semibold w-5 h-5 grid place-content-center rounded-full">0</span>
-            </button>
-            <button id="mobileMenuBtn" class="md:hidden p-2 rounded hover:bg-black/5">
-              <span class="sr-only">Ouvrir le menu</span>
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
-              </svg>
-            </button>
-          </div>
+          <a href="https://wa.me/23790632168" id="whatsAppQuick"
+            class="inline-flex items-center gap-2 bg-black text-white px-5 py-2 rounded-md font-semibold hover:opacity-90 transition">
+            <img src="assets/whatsapp.svg" alt="WhatsApp" class="w-5 h-5 object-contain" />
+            <span>WhatsApp</span>
+          </a>
         </div>
-        <div id="mobileMenu" class="md:hidden hidden pb-4 uppercase tracking-wide text-sm">
-          <a href="#home" class="block py-2 hover:opacity-70">Accueil</a>
-          <a href="#shop" class="block py-2 hover:opacity-70">Boutique</a>
-          <a href="#contact" class="block py-2 hover:opacity-70">Contact</a>
-        </div>
-      </nav>
-    </header>
-
-    <main class="pt-16" id="home">
-      <!-- Hero -->
-      <section class="relative">
-        <div class="max-w-7xl mx-auto px-6 py-20 sm:py-24 lg:py-28">
-          <div class="max-w-3xl">
-            <h1 class="font-playfair text-4xl sm:text-5xl lg:text-6xl leading-tight">
-              MyFirst Fragrances
-            </h1>
-            <p class="mt-4 text-lg sm:text-xl text-black/70">L'authenticité dans chaque goutte</p>
-            <div class="mt-8 flex gap-4">
-              <a href="#shop" class="inline-flex items-center gap-2 bg-black text-white px-6 py-3 rounded-md font-semibold hover:opacity-90 transition">
-                Découvrir
-              </a>
-              <a href="#contact" class="inline-flex items-center gap-2 ring-1 ring-black px-6 py-3 rounded-md hover:bg-black/5 transition">
-                Contactez-nous
-              </a>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- Shop / Filters -->
-      <section id="shop" class="max-w-7xl mx-auto px-6 py-16">
-        <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-          <h2 class="font-playfair text-3xl">Notre collection</h2>
-          <div class="flex flex-wrap gap-2 uppercase tracking-wide text-xs">
-            <button data-filter="All" class="filter-btn bg-black text-white px-4 py-2 rounded-md">Tous</button>
-            <button data-filter="Men" class="filter-btn ring-1 ring-black px-4 py-2 rounded-md hover:bg-black hover:text-white transition">Homme</button>
-            <button data-filter="Women" class="filter-btn ring-1 ring-black px-4 py-2 rounded-md hover:bg-black hover:text-white transition">Femme</button>
-            <button data-filter="Children" class="filter-btn ring-1 ring-black px-4 py-2 rounded-md hover:bg-black hover:text-white transition">Enfants</button>
-            <button data-filter="Gift Sets (Coffrets)" class="filter-btn ring-1 ring-black px-4 py-2 rounded-md hover:bg-black hover:text-white transition">Coffrets</button>
-          </div>
-        </div>
-
-        <!-- Grid -->
-        <div id="productsGrid" class="mt-8 grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6"></div>
-
-        <!-- Loading / Error -->
-        <div id="stateBox" class="mt-8 text-center text-white/70 hidden"></div>
-      </section>
-
-      <!-- Contact / Footer CTA -->
-      <section id="contact" class="max-w-7xl mx-auto px-6 pb-20">
-        <div class="rounded-xl border border-black/10 p-8 bg-white">
-          <h3 class="font-playfair text-2xl">Nous sommes à votre écoute</h3>
-          <p class="mt-2 text-black/70">Des questions sur nos parfums ou votre commande ? Contactez-nous sur Instagram ou WhatsApp.</p>
-          <div class="mt-6 flex flex-wrap gap-3">
-            <a href="https://www.instagram.com/my_firstperfume?igsh=cnZzczdvenJnejAy" target="_blank" class="inline-flex items-center gap-2 ring-1 ring-black px-5 py-2 rounded-md hover:bg-black/5 transition">
-              <img src="assets/instagram.svg" alt="Instagram" class="w-5 h-5 object-contain" />
-              <span>Instagram</span>
-            </a>
-            <a href="https://wa.me/23790632168" id="whatsAppQuick" class="inline-flex items-center gap-2 bg-black text-white px-5 py-2 rounded-md font-semibold hover:opacity-90 transition">
-              <img src="assets/whatsapp.svg" alt="WhatsApp" class="w-5 h-5 object-contain" />
-              <span>WhatsApp</span>
-            </a>
-          </div>
-        </div>
-      </section>
-    </main>
-
-    <footer class="border-t border-black/10 py-8 bg-white/90">
-      <div class="max-w-7xl mx-auto px-6 flex flex-col sm:flex-row items-center justify-between gap-4">
-        <p class="text-black/60">© <span id="year"></span> MyFirst Fragrances. Tous droits réservés.</p>
-        <p class="text-black/60">Créé avec passion • Parfums d'exception</p>
       </div>
-    </footer>
+    </section>
+  </main>
 
-    <!-- Product Detail Modal -->
-    <div id="productModal" class="fixed inset-0 z-50 hidden">
-      <div class="absolute inset-0 bg-black/70"></div>
-      <div class="relative max-w-3xl mx-auto mt-20 bg-white border border-black/10 rounded-xl overflow-hidden text-black">
-        <div class="flex flex-col md:flex-row">
-          <img id="modalImage" class="w-full md:w-1/2 h-64 md:h-auto object-cover" src="" alt="" />
-          <div class="p-6 md:w-1/2">
-            <h3 id="modalTitle" class="font-playfair text-2xl"></h3>
-            <p id="modalCategory" class="mt-1 text-black/70"></p>
-            <p id="modalDescription" class="mt-4 text-black/80"></p>
-            <p id="modalPrice" class="mt-6 text-xl font-semibold">0 FCFA</p>
-            <div class="mt-6 flex gap-3">
-              <button id="modalAddBtn" class="bg-black text-white px-5 py-2 rounded-md font-semibold hover:opacity-90 transition">Ajouter au panier</button>
-              <button data-close-modal class="ring-1 ring-black px-5 py-2 rounded-md hover:bg-black/5 transition">Fermer</button>
-            </div>
+  <footer class="border-t border-black/10 py-8 bg-white/90">
+    <div class="max-w-7xl mx-auto px-6 flex flex-col sm:flex-row items-center justify-between gap-4">
+      <p class="text-black/60">© <span id="year"></span> MyFirst Fragrances. Tous droits réservés.</p>
+      <p class="text-black/60">Créé avec passion • Parfums d'exception</p>
+    </div>
+  </footer>
+
+  <!-- Product Detail Modal -->
+  <div id="productModal" class="fixed inset-0 z-50 hidden">
+    <div class="absolute inset-0 bg-black/70"></div>
+    <div class="relative max-w-3xl mx-auto mt-20 bg-white border border-black/10 rounded-xl overflow-hidden text-black">
+      <div class="flex flex-col md:flex-row">
+        <img id="modalImage" class="w-full md:w-1/2 h-64 md:h-auto object-cover" src="" alt="" />
+        <div class="p-6 md:w-1/2">
+          <h3 id="modalTitle" class="font-playfair text-2xl"></h3>
+          <p id="modalCategory" class="mt-1 text-black/70"></p>
+          <p id="modalDescription" class="mt-4 text-black/80"></p>
+          <p id="modalPrice" class="mt-6 text-xl font-semibold">0 FCFA</p>
+          <div class="mt-6 flex gap-3">
+            <button id="modalAddBtn"
+              class="bg-black text-white px-5 py-2 rounded-md font-semibold hover:opacity-90 transition">Ajouter au
+              panier</button>
+            <button data-close-modal
+              class="ring-1 ring-black px-5 py-2 rounded-md hover:bg-black/5 transition">Fermer</button>
           </div>
         </div>
       </div>
     </div>
+  </div>
 
-    <!-- Cart Drawer -->
-    <div id="cartDrawer" class="fixed inset-0 z-50 hidden">
-      <div class="absolute inset-0 bg-black/60" data-close-cart></div>
-      <aside class="absolute right-0 top-0 h-full w-full max-w-md bg-white border-l border-black/10 p-6 flex flex-col text-black">
+  <!-- Cart Drawer -->
+  <div id="cartDrawer" class="fixed inset-0 z-50 hidden">
+    <div class="absolute inset-0 bg-black/60" data-close-cart></div>
+    <aside
+      class="absolute right-0 top-0 h-full w-full max-w-md bg-white border-l border-black/10 p-6 flex flex-col text-black">
+      <div class="flex items-center justify-between">
+        <h3 class="font-playfair text-2xl">Votre panier</h3>
+        <button data-close-cart class="p-2 rounded hover:bg-black/5">✕</button>
+      </div>
+      <div id="cartItems" class="mt-6 flex-1 space-y-4 overflow-y-auto pr-1"></div>
+      <div class="mt-6 border-t border-black/10 pt-4">
         <div class="flex items-center justify-between">
-          <h3 class="font-playfair text-2xl">Votre panier</h3>
-          <button data-close-cart class="p-2 rounded hover:bg-black/5">✕</button>
-        </div>
-        <div id="cartItems" class="mt-6 flex-1 space-y-4 overflow-y-auto pr-1"></div>
-        <div class="mt-6 border-t border-black/10 pt-4">
-          <div class="flex items-center justify-between">
-            <span class="text-black/70">Articles</span>
-            <span id="cartTotalQty" class="font-semibold">0</span>
-          </div>
-          <div class="flex items-center justify-between mt-1">
-            <span class="text-black/70">Total</span>
-            <span id="cartTotalPrice" class="font-semibold">0 FCFA</span>
-          </div>
-          <button id="checkoutBtn" class="mt-4 w-full bg-black text-white py-3 rounded-md font-semibold hover:opacity-90 transition">Passer à la commande</button>
-        </div>
-      </aside>
-    </div>
-
-    <!-- Checkout Summary Modal -->
-    <div id="checkoutModal" class="fixed inset-0 z-50 hidden">
-      <div class="absolute inset-0 bg-black/70"></div>
-      <div class="relative max-w-xl mx-auto mt-24 bg-white border border-black/10 rounded-xl p-6 text-black">
-        <h3 class="font-playfair text-2xl">Récapitulatif de commande</h3>
-        <div id="summaryItems" class="mt-4 space-y-3 max-h-72 overflow-y-auto pr-1"></div>
-        <div class="mt-4 flex items-center justify-between border-t border-black/10 pt-4">
-          <span>Nombre d'articles</span><span id="summaryQty" class="font-semibold">0</span>
+          <span class="text-black/70">Articles</span>
+          <span id="cartTotalQty" class="font-semibold">0</span>
         </div>
         <div class="flex items-center justify-between mt-1">
-          <span>Montant total</span><span id="summaryPrice" class="font-semibold">0 FCFA</span>
+          <span class="text-black/70">Total</span>
+          <span id="cartTotalPrice" class="font-semibold">0 FCFA</span>
         </div>
-        <div class="mt-6 flex gap-3 justify-end">
-          <button data-close-checkout class="ring-1 ring-black px-5 py-2 rounded-md hover:bg-black/5 transition">Fermer</button>
-          <button id="whatsAppOrderBtn" class="bg-black text-white px-5 py-2 rounded-md font-semibold hover:opacity-90 transition">Commander via WhatsApp</button>
-        </div>
+        <button id="checkoutBtn"
+          class="mt-4 w-full bg-black text-white py-3 rounded-md font-semibold hover:opacity-90 transition">Passer à la
+          commande</button>
+      </div>
+    </aside>
+  </div>
+
+  <!-- Checkout Summary Modal -->
+  <div id="checkoutModal" class="fixed inset-0 z-50 hidden">
+    <div class="absolute inset-0 bg-black/70"></div>
+    <div class="relative max-w-xl mx-auto mt-24 bg-white border border-black/10 rounded-xl p-6 text-black">
+      <h3 class="font-playfair text-2xl">Récapitulatif de commande</h3>
+      <div id="summaryItems" class="mt-4 space-y-3 max-h-72 overflow-y-auto pr-1"></div>
+      <div class="mt-4 flex items-center justify-between border-t border-black/10 pt-4">
+        <span>Nombre d'articles</span><span id="summaryQty" class="font-semibold">0</span>
+      </div>
+      <div class="flex items-center justify-between mt-1">
+        <span>Montant total</span><span id="summaryPrice" class="font-semibold">0 FCFA</span>
+      </div>
+      <div class="mt-6 flex gap-3 justify-end">
+        <button data-close-checkout
+          class="ring-1 ring-black px-5 py-2 rounded-md hover:bg-black/5 transition">Fermer</button>
+        <button id="whatsAppOrderBtn"
+          class="bg-black text-white px-5 py-2 rounded-md font-semibold hover:opacity-90 transition">Commander via
+          WhatsApp</button>
       </div>
     </div>
+  </div>
 
-    <script src="./cart.js"></script>
-    <script src="./shop.js"></script>
-  </body>
+  <script src="./cart.js"></script>
+  <script src="./shop.js"></script>
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('./service-worker.js')
+          .then(reg => console.log('SW registered'))
+          .catch(err => console.log('SW registration failed', err));
+      });
+    }
+  </script>
+</body>
+
 </html>
