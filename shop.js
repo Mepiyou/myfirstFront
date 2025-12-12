@@ -20,17 +20,40 @@ function applyTheme(theme) {
   body.className = "bg-white text-black transition-colors duration-500"; // Reset base
 
   switch(theme) {
+
     case 'christmas':
       body.classList.add('theme-christmas');
-      // We can inject styles dynamically or toggle classes
-      // Simple visual change: Red accent, green hints?
+      
+      // Inject Christmas Banner
+      const container = document.querySelector('main');
+      if (container && !document.getElementById('xmas-banner')) {
+        const banner = document.createElement('div');
+        banner.id = 'xmas-banner';
+        banner.className = 'mb-8 bg-red-800 text-white rounded-xl p-6 relative overflow-hidden shadow-lg';
+        banner.innerHTML = `
+          <div class="relative z-10 flex flex-col md:flex-row items-center justify-between gap-4">
+            <div class="text-center md:text-left">
+              <h2 class="font-playfair text-3xl font-bold mb-2">Joyeux Noël ! 🎄</h2>
+              <p class="text-red-100">Découvrez nos coffrets cadeaux exclusifs pour les fêtes.</p>
+            </div>
+            <div class="text-4xl animate-bounce">🎁</div>
+          </div>
+          <!-- Snow effect base -->
+          <div class="absolute inset-0 opacity-10 pointer-events-none" style="background-image: radial-gradient(circle, white 2px, transparent 2.5px); background-size: 24px 24px;"></div>
+        `;
+        // Insert before the filter logic or grid (assuming grid is inside main)
+        const grid = document.getElementById('productsGrid');
+        if (grid) {
+             // Try to insert before the filters if reachable, or just before grid
+             const parent = grid.parentElement;
+             // We want it at the top of main roughly
+             container.insertBefore(banner, container.children[0]); 
+        }
+      }
+      
       document.querySelectorAll('.bg-black').forEach(el => {
         el.classList.remove('bg-black');
         el.classList.add('bg-red-800');
-      });
-      document.querySelectorAll('.text-black').forEach(el => {
-        // el.classList.remove('text-black');
-        // el.classList.add('text-green-900');
       });
       break;
     case 'newyear':
