@@ -194,7 +194,9 @@ function openWhatsAppOrder() {
   if (!cart.length) return;
   const lines = cart.map((it) => `- ${it.name} (x${it.qty}): ${formatPrice(it.qty * it.price)}`);
   const { price } = cartTotals();
-  const message = `🛍️ Récapitulatif de commande MyFirst Fragrances:\n${lines.join('\\n')}\nTotal: ${formatPrice(price)}\nMerci pour votre commande !`;
+  const isChristmas = document.body.classList.contains('theme-christmas');
+  const greeting = isChristmas ? "🎄 Ho Ho Ho ! Joyeux Noël ! Je souhaite commander :" : "🛍️ Récapitulatif de commande MyFirst Fragrances:";
+  const message = `${greeting}\n${lines.join('\\n')}\nTotal: ${formatPrice(price)}\nMerci pour votre commande !`;
   const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
   window.open(url, '_blank');
 }

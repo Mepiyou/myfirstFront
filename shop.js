@@ -36,7 +36,7 @@ function applyTheme(theme) {
               <h2 class="font-playfair text-3xl font-bold mb-2">Joyeux Noël ! 🎄</h2>
               <p class="text-red-100">Découvrez nos coffrets cadeaux exclusifs pour les fêtes.</p>
             </div>
-            <div class="text-4xl animate-bounce">🎁</div>
+            <div class="text-4xl animate-bounce cursor-pointer hover:scale-110 transition" onclick="document.getElementById('productsGrid').scrollIntoView({behavior: 'smooth', block: 'start'})">🎁</div>
           </div>
           <!-- Snow effect base -->
           <div class="absolute inset-0 opacity-10 pointer-events-none" style="background-image: radial-gradient(circle, white 2px, transparent 2.5px); background-size: 24px 24px;"></div>
@@ -139,12 +139,16 @@ function fcfa(n) {
 }
 
 function productCard(p) {
-  // Zara style: tall images, minimal text
   const img = p.image || 'https://via.placeholder.com/600x800?text=Perfume';
   const out = Number(p.stock || 0) <= 0;
   
+  // Christmas Decoration Logic
+  const isChristmas = document.body.classList.contains('theme-christmas');
+  const christmasBadge = isChristmas ? '<span class="absolute top-2 right-2 text-xl z-20 drop-shadow-md">🎄</span>' : '';
+
   return `
-    <div class="group cursor-pointer" onclick="openProductModal(state.products.find(x => x._id === '${p._id}'))">
+    <div class="group cursor-pointer relative" onclick="openProductModal(state.products.find(x => x._id === '${p._id}'))">
+      ${christmasBadge}
       <div class="relative aspect-[3/4] overflow-hidden bg-neutral-100">
         <img src="${img}" alt="${p.name}" loading="lazy" class="w-full h-full object-cover transition duration-700 group-hover:scale-105 ${out ? 'opacity-70 grayscale' : ''}" />
         ${p.isPromotion ? '<span class="absolute bottom-2 left-2 bg-white/90 backdrop-blur text-black text-[10px] uppercase font-bold px-2 py-1 tracking-wider">Promo</span>' : ''}
