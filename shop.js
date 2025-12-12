@@ -98,15 +98,13 @@ function renderSkeleton(count = 8) {
   }
 
   const card = () => `
-    <div class="rounded-xl overflow-hidden ring-1 ring-black/5 bg-white">
-      <div class="h-60 animate-shimmer"></div>
-      <div class="p-4 space-y-3">
-        <div class="flex justify-between items-center">
-             <div class="h-5 animate-shimmer rounded w-1/2"></div>
-             <div class="h-5 animate-shimmer rounded w-1/4"></div>
-        </div>
-        <div class="h-4 animate-shimmer rounded w-1/3"></div>
-        <div class="h-10 animate-shimmer rounded mt-4"></div>
+    <div class="space-y-3">
+      <div class="aspect-[3/4] bg-neutral-100 relative overflow-hidden">
+        <div class="absolute inset-0 animate-shimmer"></div>
+      </div>
+      <div class="space-y-2 px-1">
+        <div class="h-4 bg-neutral-100 rounded w-3/4 animate-shimmer"></div>
+        <div class="h-4 bg-neutral-100 rounded w-1/4 animate-shimmer"></div>
       </div>
     </div>
   `;
@@ -118,28 +116,39 @@ function fcfa(n) {
 }
 
 function productCard(p) {
-  const img = p.image || 'https://via.placeholder.com/400x400?text=Perfume';
+  // Zara style: tall images, minimal text
+  const img = p.image || 'https://via.placeholder.com/600x800?text=Perfume';
   const out = Number(p.stock || 0) <= 0;
+  
   return `
-    <div class=\"group rounded-xl bg-white text-black overflow-hidden ring-1 ring-black/10 hover:shadow-lg transition ${out ? 'opacity-90' : ''}\">
-      <div class="relative">
-        <img src="${img}" alt="${p.name}" class="w-full h-60 object-cover ${out ? '' : 'group-hover:scale-105'} transition duration-300" />
-        ${p.isPromotion ? '<span class=\"absolute top-2 left-2 bg-gold text-black text-xs font-semibold px-2 py-1 rounded\">Promo</span>' : ''}
-        ${out ? '<span class=\"absolute top-2 right-2 bg-red-600 text-white text-xs font-semibold px-2 py-1 rounded\">Indisponible</span>' : ''}
+    <div class="group cursor-pointer" onclick="openProductModal(state.products.find(x => x._id === '${p._id}'))">
+      <div class="relative aspect-[3/4] overflow-hidden bg-neutral-100">
+        <img src="${img}" alt="${p.name}" loading="lazy" class="w-full h-full object-cover transition duration-700 group-hover:scale-105 ${out ? 'opacity-70 grayscale' : ''}" />
+        ${p.isPromotion ? '<span class="absolute bottom-2 left-2 bg-white/90 backdrop-blur text-black text-[10px] uppercase font-bold px-2 py-1 tracking-wider">Promo</span>' : ''}
+        ${out ? '<div class="absolute inset-0 flex items-center justify-center bg-white/40"><span class="bg-black text-white text-xs uppercase px-3 py-1 font-medium tracking-widest">Sold Out</span></div>' : ''}
+        
+        <!-- Hover Add Button (Desktop) -->
+        <button data-add="${p._id}" onclick="event.stopPropagation(); window.addToCart({ _id: '${p._id}', name: '${p.name.replace(/'/g, "\\'")}', price: ${p.price}, image: '${p.image}' })" 
+          class="absolute bottom-4 right-4 bg-white text-black w-10 h-10 rounded-full shadow-lg flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 hover:bg-black hover:text-white md:flex hidden">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+          </svg>
+        </button>
       </div>
-      <div class="p-4">
-        <div class="flex items-center justify-between">
-          <h3 class="font-playfair text-lg">${p.name}</h3>
-          <span class="font-semibold">${fcfa(p.price)}</span>
+      
+      <div class="mt-3 flex justify-between items-start px-0.5">
+        <div>
+           <h3 class="text-xs uppercase tracking-widest font-medium text-black/90 truncate pr-2">${p.name}</h3>
+           <p class="text-[10px] text-black/60 uppercase tracking-wide mt-0.5">${p.category || 'Fragrance'}</p>
         </div>
-        <div class="text-sm ${out ? 'text-red-500' : 'text-black/70'} mt-1">${out ? 'Indisponible' : (p.category || '')}</div>
-        <div class="mt-4 flex gap-2">
-          <button data-view=\"${p._id}\" class=\"flex-1 ring-1 ring-black rounded px-3 py-2 hover:bg-black hover:text-white transition\">Voir</button>
-          ${out
-            ? '<button class=\"flex-1 bg-gray-500 text-white rounded px-3 py-2 font-semibold cursor-not-allowed\" disabled aria-disabled=\"true\">Indisponible</button>'
-            : `<button data-add=\"${p._id}\" class=\"flex-1 bg-black text-white rounded px-3 py-2 font-semibold hover:opacity-90 transition\">Ajouter au panier</button>`}
-        </div>
+        <span class="text-xs font-semibold tracking-wide">${fcfa(p.price)}</span>
       </div>
+      
+      <!-- Mobile Add Button (Visible always on mobile) -->
+       <button data-add="${p._id}" onclick="event.stopPropagation(); window.addToCart({ _id: '${p._id}', name: '${p.name.replace(/'/g, "\\'")}', price: ${p.price}, image: '${p.image}' })" 
+          class="mt-3 w-full bg-black text-white text-xs uppercase tracking-widest py-3 font-medium md:hidden focus:bg-gray-800">
+          Ajouter
+        </button>
     </div>
   `;
 }
