@@ -250,6 +250,7 @@ function productCard(p) {
   const img = p.image || 'https://via.placeholder.com/600x800?text=Perfume';
   const out = Number(p.stock || 0) <= 0;
   
+  return `
     <div class="group cursor-pointer relative" onclick="openProductModal(state.products.find(x => x._id === '${p._id}'))">
       <div class="relative aspect-[3/4] overflow-hidden bg-neutral-100">
         <img src="${img}" alt="${p.name}" loading="lazy" class="w-full h-full object-cover transition duration-700 group-hover:scale-105 ${out ? 'opacity-70 grayscale' : ''}" />
