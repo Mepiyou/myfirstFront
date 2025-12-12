@@ -1,6 +1,6 @@
 // admin/admin.js - Handles login and dashboard CRUD
 
-const API_BASE = 'https://myfirst-backend.onrender.com';
+const API_BASE = 'https://myfirstapi-three.vercel.app/';
 const TOKEN_KEY = 'mff_jwt_v1';
 
 function setToken(t) { localStorage.setItem(TOKEN_KEY, t); }
