@@ -111,8 +111,31 @@
 
     <!-- Shop / Filters -->
     <section id="shop" class="max-w-7xl mx-auto px-6 py-16">
-      <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-        <h2 class="font-playfair text-3xl">Notre collection</h2>
+      <div class="flex flex-col gap-6">
+        <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+          <h2 class="font-playfair text-3xl">Notre collection</h2>
+          <div class="flex items-center gap-3">
+            <!-- Search -->
+            <div class="relative group">
+              <input type="text" id="searchInput" placeholder="Rechercher..."
+                class="pl-9 pr-4 py-2 rounded-md ring-1 ring-black/10 focus:ring-black focus:outline-none w-40 sm:w-64 transition-all text-sm font-inter placeholder:text-gray-400">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                stroke="currentColor" class="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-gray-400">
+                <path stroke-linecap="round" stroke-linejoin="round"
+                  d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
+              </svg>
+            </div>
+            <!-- Sort -->
+            <select id="sortSelect"
+              class="py-2 pl-3 pr-8 rounded-md ring-1 ring-black/10 focus:ring-black focus:outline-none text-sm font-inter bg-white cursor-pointer appearance-none bg-[url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20width%3D%2220%22%20height%3D%2220%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Cpath%20d%3D%22M5%207l5%205%205-5%22%20stroke%3D%22%23000%22%20stroke-width%3D%221.5%22%20fill%3D%22none%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%2F%3E%3C%2Fsvg%3E')] bg-no-repeat bg-[right_0.5rem_center]">
+              <option value="default">Trier par</option>
+              <option value="price-asc">Prix croissant</option>
+              <option value="price-desc">Prix décroissant</option>
+              <option value="name-asc">Nom (A-Z)</option>
+            </select>
+          </div>
+        </div>
+
         <div class="flex flex-wrap gap-2 uppercase tracking-wide text-xs">
           <button data-filter="All" class="filter-btn bg-black text-white px-4 py-2 rounded-md">Tous</button>
           <button data-filter="Men"

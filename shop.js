@@ -6,6 +6,8 @@ const state = {
   products: [],
   filtered: [],
   activeFilter: 'All',
+  searchQuery: '',
+  sortOption: 'default',
   selected: null,
 };
 
@@ -238,6 +240,13 @@ function renderSkeleton(count = 8) {
         background-size: 200% 100%;
         animation: shimmer 1.5s infinite;
       }
+      @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(10px); }
+        to { opacity: 1; transform: translateY(0); }
+      }
+      .animate-fade-in {
+        animation: fadeIn 0.5s ease-out forwards;
+      }
     `;
     document.head.appendChild(style);
   }
@@ -262,7 +271,9 @@ function fcfa(n) {
 
 function productCard(p) {
   const img = p.image || 'https://via.placeholder.com/600x800?text=Perfume';
-  const out = Number(p.stock || 0) <= 0;
+  const stock = Number(p.stock || 0);
+  const out = stock <= 0;
+  const lowStock = stock > 0 && stock <= 5;
   
   return `
     <div class="group cursor-pointer relative" onclick="openProductModal(state.products.find(x => x._id === '${p._id}'))">
@@ -270,6 +281,7 @@ function productCard(p) {
         <img src="${img}" alt="${p.name}" loading="lazy" class="w-full h-full object-cover transition duration-700 group-hover:scale-105 ${out ? 'opacity-70 grayscale' : ''}" />
         ${p.isPromotion ? '<span class="absolute bottom-2 left-2 bg-white/90 backdrop-blur text-black text-[10px] uppercase font-bold px-2 py-1 tracking-wider">Promo</span>' : ''}
         ${out ? '<div class="absolute inset-0 flex items-center justify-center bg-white/40"><span class="bg-black text-white text-xs uppercase px-3 py-1 font-medium tracking-widest">Sold Out</span></div>' : ''}
+        ${lowStock ? `<span class="absolute top-2 right-2 bg-red-500 text-white text-[10px] font-bold px-2 py-0.5 rounded shadow-sm animate-pulse">Plus que ${stock} !</span>` : ''}
         
         <!-- Hover Add Button (Desktop) -->
         <button data-add="${p._id}" onclick="event.stopPropagation(); window.addToCart({ _id: '${p._id}', name: '${p.name.replace(/'/g, "\\'")}', price: ${p.price}, image: '${p.image}' })" 
@@ -296,16 +308,43 @@ function productCard(p) {
 }
 
 function applyFilter() {
-  const f = state.activeFilter;
-  if (f === 'All') state.filtered = state.products;
-  else state.filtered = state.products.filter((p) => (p.category || '').toLowerCase() === f.toLowerCase());
+  let res = state.products;
+
+  // 1. Category Filter
+  if (state.activeFilter !== 'All') {
+    res = res.filter((p) => (p.category || '').toLowerCase() === state.activeFilter.toLowerCase());
+  }
+
+  // 2. Search Filter
+  if (state.searchQuery.trim()) {
+    const q = state.searchQuery.toLowerCase();
+    res = res.filter(p => p.name.toLowerCase().includes(q));
+  }
+
+  // 3. Sorting
+  if (state.sortOption !== 'default') {
+    res = [...res].sort((a, b) => {
+      switch (state.sortOption) {
+        case 'price-asc': return a.price - b.price;
+        case 'price-desc': return b.price - a.price;
+        case 'name-asc': return a.name.localeCompare(b.name);
+        default: return 0;
+      }
+    });
+  }
+
+  state.filtered = res;
   renderGrid();
 }
 
 function renderGrid() {
   const grid = document.getElementById('productsGrid');
   if (!grid) return;
-  grid.innerHTML = state.filtered.map(productCard).join('');
+  grid.innerHTML = state.filtered.map((p, i) => {
+      // Add animation delay based on index for stagger effect
+      const cardHtml = productCard(p);
+      return cardHtml.replace('class="group', `style="animation-delay: ${i * 50}ms" class="animate-fade-in group`);
+  }).join('');
   if (!state.filtered.length) {
     // fallback empty state
     grid.innerHTML = '<div class=\"col-span-full text-center text-white/70\">Aucun produit trouvé.</div>';
@@ -401,6 +440,24 @@ window.addEventListener('DOMContentLoaded', () => {
       applyFilter();
     });
   });
+  
+  // Search
+  const searchInput = document.getElementById('searchInput');
+  if (searchInput) {
+    searchInput.addEventListener('input', (e) => {
+      state.searchQuery = e.target.value;
+      applyFilter();
+    });
+  }
+
+  // Sort
+  const sortSelect = document.getElementById('sortSelect');
+  if (sortSelect) {
+    sortSelect.addEventListener('change', (e) => {
+      state.sortOption = e.target.value;
+      applyFilter();
+    });
+  }
 
   document.querySelectorAll('[data-close-modal]').forEach((el) => el.addEventListener('click', closeProductModal));
 
