@@ -1,4 +1,10 @@
-const CACHE_NAME = 'mff-v1';
+const CACHE_NAME = 'mff-v2';
+
+self.addEventListener('message', (event) => {
+  if (event.data && event.data.type === 'SKIP_WAITING') {
+    self.skipWaiting();
+  }
+});
 const ASSETS_TO_CACHE = [
   './',
   './index.html',

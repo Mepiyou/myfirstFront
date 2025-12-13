@@ -256,14 +256,61 @@
     </div>
   </div>
 
+  <div id="updateToast"
+    class="fixed bottom-4 right-4 z-50 transform translate-y-20 opacity-0 transition-all duration-300 pointer-events-none">
+    <div class="bg-black text-white px-6 py-4 rounded-lg shadow-xl flex items-center gap-4">
+      <div>
+        <h4 class="font-bold text-sm">Mise à jour disponible</h4>
+        <p class="text-xs text-gray-300 mt-1">Nouvelle version prête.</p>
+      </div>
+      <button id="refreshBtn"
+        class="bg-white text-black px-3 py-1.5 rounded text-xs font-bold hover:bg-gray-100 transition">
+        Rafraîchir
+      </button>
+    </div>
+  </div>
+
   <script src="./cart.js"></script>
   <script src="./shop.js"></script>
   <script>
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', () => {
-        navigator.serviceWorker.register('./service-worker.js')
-          .then(reg => console.log('SW registered'))
-          .catch(err => console.log('SW registration failed', err));
+        let refreshing = false;
+        navigator.serviceWorker.addEventListener('controllerchange', () => {
+          if (!refreshing) {
+            refreshing = true;
+            window.location.reload();
+          }
+        });
+
+        navigator.serviceWorker.register('./service-worker.js').then(reg => {
+          console.log('SW registered');
+
+          if (reg.waiting) {
+            showUpdateToast(reg.waiting);
+            return;
+          }
+
+          reg.addEventListener('updatefound', () => {
+            const newWorker = reg.installing;
+            newWorker.addEventListener('statechange', () => {
+              if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
+                showUpdateToast(newWorker);
+              }
+            });
+          });
+        });
+
+        function showUpdateToast(worker) {
+          const toast = document.getElementById('updateToast');
+          const btn = document.getElementById('refreshBtn');
+
+          toast.classList.remove('translate-y-20', 'opacity-0', 'pointer-events-none');
+
+          btn.addEventListener('click', () => {
+            worker.postMessage({ type: 'SKIP_WAITING' });
+          });
+        }
       });
     }
   </script>
