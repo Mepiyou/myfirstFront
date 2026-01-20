@@ -100,7 +100,7 @@ const offlineSync = {
             body = JSON.stringify(body);
           }
 
-          await fetch(item.url, {
+          await fetchAuth(item.url, {
             method: item.method,
             headers: item.headers,
             body: body
@@ -140,6 +140,23 @@ async function login(email, password) {
 function authHeaders() {
   const t = getToken();
   return t ? { Authorization: `Bearer ${t}` } : {};
+}
+
+function handleAuthError() {
+  clearToken();
+  window.location.href = '/admin/login.html?msg=session_expired';
+}
+
+async function fetchAuth(url, options = {}) {
+  const headers = { ...options.headers, ...authHeaders() };
+  const res = await fetch(url, { ...options, headers });
+  
+  if (res.status === 401) {
+    handleAuthError();
+    throw new Error('Session expiré');
+  }
+  
+  return res;
 }
 
 async function fetchProductsAdmin() {
@@ -183,9 +200,8 @@ async function saveSiteConfig(settings) {
   // but for update it might be fine. We'll try update if ID exists.
   
   if (current._id) {
-    const res = await fetch(`${API_BASE}/api/admin/products/${current._id}`, {
+    const res = await fetchAuth(`${API_BASE}/api/admin/products/${current._id}`, {
       method: 'PUT',
-      headers: authHeaders(),
       body
     });
     if (!res.ok) throw new Error('Échec sauvegarde config');
@@ -193,9 +209,8 @@ async function saveSiteConfig(settings) {
     // Create
     // If backend requires image, we might need a workaround or existing URL
     body.append('imageUrl', 'https://via.placeholder.com/10'); 
-    const res = await fetch(`${API_BASE}/api/admin/products`, {
+    const res = await fetchAuth(`${API_BASE}/api/admin/products`, {
       method: 'POST',
-      headers: authHeaders(),
       body
     });
     if (!res.ok) throw new Error('Échec création config');
@@ -295,7 +310,7 @@ function bindTabs() {
   document.getElementById('confirmDeleteBtn')?.addEventListener('click', async () => {
     if (!deleteTargetId) return;
     try {
-      const res = await fetch(`${API_BASE}/api/admin/products/${deleteTargetId}`, { method: 'DELETE', headers: { ...authHeaders() } });
+      const res = await fetchAuth(`${API_BASE}/api/admin/products/${deleteTargetId}`, { method: 'DELETE' });
       if (!res.ok) throw new Error('Échec de la suppression');
       toast('Produit supprimé');
       closeDeleteModal();
@@ -336,7 +351,7 @@ function bindTabs() {
         } else if (file) {
           fd.append('image', file);
         }
-        const res = await fetch(`${API_BASE}/api/admin/products/${id}`, { method: 'PUT', headers: { ...authHeaders() }, body: fd });
+        const res = await fetchAuth(`${API_BASE}/api/admin/products/${id}`, { method: 'PUT', body: fd });
         if (!res.ok) throw new Error('Échec de la mise à jour');
         toast('Produit mis à jour');
         closeEditModal();
@@ -394,7 +409,7 @@ function bindAddForm() {
       } else if (file) {
         fd.append('image', file);
       }
-      const res = await fetch(`${API_BASE}/api/admin/products`, { method: 'POST', headers: { ...authHeaders() }, body: fd });
+      const res = await fetchAuth(`${API_BASE}/api/admin/products`, { method: 'POST', body: fd });
       if (!res.ok) throw new Error('Échec de la création');
       form.reset();
       toast('Produit créé');
